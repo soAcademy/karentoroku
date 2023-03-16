@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { Navbar } from "flowbite-react";
 
 export const AppNavbar = () => {
@@ -16,10 +16,18 @@ export const AppNavbar = () => {
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse>
-        <Navbar.Link as={NavLink} to={"/"}>
+        <Navbar.Link
+          as={NavLink}
+          to={"/"}
+          active={useLocation().pathname === "/"}
+        >
           Home
         </Navbar.Link>
-        <Navbar.Link as={NavLink} to={"/availability"}>
+        <Navbar.Link
+          as={NavLink}
+          to={"/availability"}
+          active={useLocation().pathname === "/availability"}
+        >
           Availability
         </Navbar.Link>
       </Navbar.Collapse>
