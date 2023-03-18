@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../img/logocolor.png";
-import Hamburger from "../icon/Hamburger";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -13,17 +13,20 @@ const Navbar = () => {
   };
   return (
     <>
-      <nav className="container relative mx-auto">
-        <div className="flex items-center justify-between">
-          <div className="cursor-pointer pt-2">
+      <nav className="mx-auto">
+        <div className="flex items-center justify-between mx-2">
+          <div className="cursor-pointer">
             <img src={Logo} alt="Company Logo" className="w-48 bg-white" />
           </div>
-          <div className="hidden space-x-8 md:flex">
+          <div className="hidden md:flex md:space-x-5 lg:space-x-8">
             <Link to="/" className="nav-links">
               Home
             </Link>
             <Link to="/pricing" className="nav-links">
               Pricing
+            </Link>
+            <Link to="/pricing" className="nav-links">
+              User Dashboard
             </Link>
             <Link to="/faq" className="nav-links">
               Faq
@@ -31,37 +34,45 @@ const Navbar = () => {
             <Link to="/about" className="nav-links">
               About Us
             </Link>
-            <Link to="/login" className="nav-links">
+          </div>
+          <div className="hidden space-x-4 md:flex">
+            <Link to="login" className="nav-links">
               Login
             </Link>
-            <Link to="/getstart" className="nav-links">
-              Get Started
+            <Link to="/getStart" className="nav-links">
+              <span className="rounded-md border-solid border-red-200 bg-orange-200 p-4">
+                Get started
+              </span>
             </Link>
           </div>
-          <button id="menu-btn" onClick={handleOpen} className="block md:hidden">
-            <Hamburger />
-          </button>
+          <div className="flex space-x-8 items-center md:hidden">
+            <Link to="/getStart" className="nav-links">
+              <span className="rounded-md border-solid border-red-200 bg-orange-200 p-3">
+                Get started
+              </span>
+            </Link>
+            <div onClick={handleOpen} className="text-5xl cursor-pointer">
+            <GiHamburgerMenu />
+            </div>
+          </div>
         </div>
         {open && (
           <div>
-            <div className="absolute flex w-full flex-col space-y-3 self-end bg-red-100 py-8 pl-3 font-bold drop-shadow-2xl">
+            <div className="absolute flex w-full flex-col space-y-3 self-end bg-orange-100 py-8 pl-3 font-bold drop-shadow-2xl md:hidden">
               <Link to="/" className="nav-links">
                 Home
               </Link>
               <Link to="/pricing" className="nav-links">
                 Pricing
               </Link>
+              <Link to="/pricing" className="nav-links">
+                User Dashboard
+              </Link>
               <Link to="/faq" className="nav-links">
                 Faq
               </Link>
               <Link to="/about" className="nav-links">
                 About Us
-              </Link>
-              <Link to="/login" className="nav-links">
-                Login
-              </Link>
-              <Link to="/getstart" className="nav-links">
-                Get Started
               </Link>
             </div>
           </div>
