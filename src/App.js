@@ -1,14 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home } from "./pages/Home";
-import { AppNavbar } from "./components/AppNavbar";
+import Home from "./pages/Home"
+import Login from "./pages/Login"
+import GetStart from "./pages/GetStart"
 
 function App() {
   return (
     <BrowserRouter>
-      <AppNavbar />
+    <>
       <Routes>
-        <Route index element={<Home />} />
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/Login" element={<Login />} />
+        <Route exact path="/GetStart" element={<GetStart />} />
       </Routes>
+      </>
     </BrowserRouter>
   );
 }
