@@ -15,9 +15,9 @@ const Navbar = () => {
   return (
     <>
       <nav className="mx-auto">
-        <div className="mx-2 flex items-center justify-between">
+        <div className="mx-5 flex items-center justify-between mt-5">
           <div className="cursor-pointer">
-            <img src={Logo} alt="Company Logo" className="w-48 bg-white" />
+            <img src={Logo} alt="Company Logo" className="w-20 bg-white" />
           </div>
           <div className="hidden md:flex md:space-x-5 lg:space-x-8">
             <Link to="/" className="nav-links">

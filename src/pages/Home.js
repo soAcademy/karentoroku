@@ -39,16 +39,16 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <div className="w-full">
+      <div className="w-full mt-5">
         <div className="">
-          <div className="flex flex-col gap-5">
-            <h4 className="text-lg font-normal ml-5">
+          <div className="flex flex-col gap-5 mx-5">
+            <h4 className="text-lg font-normal">
               WELCOME TO NEW ERA
             </h4>
-            <h1 className="text-6xl font-bold ml-5">
+            <h1 className="text-6xl font-bold">
               This is area for
             </h1>
-            <h2 className="text-4xl font-bold ml-5">
+            <h2 className="text-4xl font-bold">
               {text}
               <Cursor
               cursorBlinking="false"
@@ -56,10 +56,10 @@ const Home = () => {
               cursorColor="#ff014f"
             />
             </h2>
-            <h3 className="mt-10 ml-5 text-3xl font-bold">
+            <h3 className="mt-10 text-3xl font-bold">
               The new way of approaching whom they are expert
             </h3>
-            <span className="ml-5">
+            <span>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
               nulla turpis, cursus fringilla accumsan sed, auctor quis est.
               Aenean ut accumsan sem. Vivamus vel leo in est hendrerit tempus
