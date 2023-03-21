@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import UserHome from "./pages/UserHome"
+import UserNavbar from "./components/navbar/UserNavbar";
 
 function App() {
   return (
     <BrowserRouter>
       <>
       <Routes>
-      <Route exact path="/" element={<UserHome />} />
+      <Route exact path="/" element={<UserNavbar />} />
       </Routes>
       </>
     </BrowserRouter>

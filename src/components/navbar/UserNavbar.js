@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../img/logocolor.png";
-import { BsPersonCircle } from "react-icons/bs";
+import { BsPerson } from "react-icons/bs";
 
 const UserNavbar = () => {
   const [open, setOpen] = useState(false);
@@ -15,9 +15,9 @@ const UserNavbar = () => {
   return (
     <>
       <nav className="mx-auto">
-        <div className="flex items-center justify-between border-b-[1px] border-black px-2">
-          <div className="flex cursor-pointer items-center">
-            <img src={Logo} alt="Company Logo" className="w-48 bg-white" />
+        <div className="flex items-center justify-between border-b-[1px] border-black px-2 py-3">
+          <div className="flex cursor-pointer items-center space-x-5">
+            <img src={Logo} alt="Company Logo" className="w-20 bg-white" />
             <div className="text-xl">Home</div>
           </div>
           <div className="hidden md:flex md:space-x-5 lg:space-x-8">
@@ -44,8 +44,8 @@ const UserNavbar = () => {
             </Link>
           </div>
           <div className="md:hidden pr-5">
-            <div onClick={handleOpen} className="cursor-pointer text-6xl">
-              <BsPersonCircle />
+            <div onClick={handleOpen} className="cursor-pointer text-4xl">
+              <BsPerson />
             </div>
           </div>
         </div>
