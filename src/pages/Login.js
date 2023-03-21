@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../components/img/logocolor.png";
 import { Link } from "react-router-dom";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
+import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
 import UserHomepage from "./UserHomepage";
 
@@ -28,10 +28,6 @@ const Login = () => {
 
   const onFailure = (res) => {
     console.log("failed", res);
-  };
-
-  const logOut = () => {
-    setProfile(null);
   };
 
   return (

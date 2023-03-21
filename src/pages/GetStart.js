@@ -5,7 +5,6 @@ import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { gapi } from "gapi-script";
 
 const GetStart = () => {
-  const [returnHome, setReturnHome] = useState(false);
   const [profile, setProfile] = useState(null);
 
   const clientId =
