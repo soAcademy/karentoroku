@@ -36,8 +36,6 @@ const GetStart = () => {
 
   return (
     <>
-      <br />
-      <br />
       {profile ? (
         <div>
           <img src={profile.imageUrl} alt="user image" />
