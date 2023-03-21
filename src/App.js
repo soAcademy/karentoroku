@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { AppNavbar } from "./components/AppNavbar";
-import { SetCustomHours } from "./pages/SetCustomHours";
+import { SetAvailability } from "./pages/SetAvailability";
 import { ErrorPage } from "./pages/ErrorPage";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
       <AppNavbar />
       <Routes>
         <Route path="*" element={<ErrorPage />} />
-        <Route path="/setCustomHours" element={<SetCustomHours />} />
+        <Route path="/SetAvailability" element={<SetAvailability />} />
         <Route index element={<Home />} />
       </Routes>
     </BrowserRouter>
