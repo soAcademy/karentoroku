@@ -32,7 +32,9 @@ const Login = () => {
 
   return (
     <>
-      {profile ? <UserHomepage /> : (
+      {profile ? (
+        <UserHomepage />
+      ) : (
         <>
           <div className="mt-20 w-full">
             <div className="flex items-center justify-center">

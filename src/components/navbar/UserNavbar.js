@@ -83,11 +83,13 @@ const UserNavbar = () => {
               <Link to="/sharingYourLink" className="nav-links">
                 Sharing Your Link
               </Link>
-              <button
-              onClick={GoogleLogout}
-              >
-                Logout
-              </button>
+              <div>
+                <GoogleLogout
+                  clientId={clientId}
+                  buttonText="Log out"
+                  onLogoutSuccess={logOut}
+                />
+              </div>
             </div>
           </div>
         )}

@@ -17,15 +17,43 @@ const UserHomepage = () => {
         <BsPerson />
         </div>
         <div>
-          <p>username</p>
-          <p className='text-orange-700'>karentoroku.com/username</p>
+          <p className='text-xl'>username</p>
+          <p className='text-orange-700 text-xl'>karentoroku.com/username</p>
         </div>
       </div>
+      <div className='text-center'>
       <button
-      className=''
+      className='text-xl px-60 py-5 my-5 rounded-full text-center border-2'
       >
         + New Event Type
       </button>
+      </div>
+      <div className='mt-5 mx-5 bg-orange-200 border-2 border-orange-200 pl-5 pt-10'>
+        <p className='text-2xl'>Meeting 30 min</p>
+        <p className='text-gray-500 mt-2'>30mins, One-on-One</p>
+        <p className='text-orange-700 my-10 text-lg'>view booking page</p>
+      </div>
+      <div className='mt-0.5 mx-5 bg-orange-200 border-2 border-orange-200 flex justify-around items-center py-2'>
+        <p className='text-lg'>Copy Link</p>
+        <button
+          className='bg-white px-10 py-3 border-orange-700 border-2 rounded-full text-lg'
+        >
+          Share
+        </button>
+      </div>
+      <div className='mt-5 mx-5 bg-orange-200 border-2 border-orange-200 pl-5 pt-10'>
+        <p className='text-2xl'>Meeting 30 min</p>
+        <p className='text-gray-500 mt-2'>30mins, One-on-One</p>
+        <p className='text-orange-700 my-10 text-lg'>view booking page</p>
+      </div>
+      <div className='mt-0.5 mx-5 bg-orange-200 border-2 border-orange-200 flex justify-around items-center py-2'>
+        <p className='text-lg'>Copy Link</p>
+        <button
+          className='bg-white px-10 py-3 border-orange-700 border-2 rounded-full text-lg'
+        >
+          Share
+        </button>
+      </div>
     </div>
     </>
   )
