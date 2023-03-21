@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home } from "./pages/Home";
-import { AppNavbar } from "./components/AppNavbar";
+import UserHome from "./pages/UserHome"
 
 function App() {
   return (
     <BrowserRouter>
-      <AppNavbar />
+      <>
       <Routes>
-        <Route index element={<Home />} />
+      <Route exact path="/" element={<UserHome />} />
       </Routes>
+      </>
     </BrowserRouter>
   );
 }
