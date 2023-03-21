@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "../img/logocolor.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
@@ -14,7 +15,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="mx-auto">
-        <div className="flex items-center justify-between mx-2">
+        <div className="mx-2 flex items-center justify-between">
           <div className="cursor-pointer">
             <img src={Logo} alt="Company Logo" className="w-48 bg-white" />
           </div>
@@ -45,14 +46,14 @@ const Navbar = () => {
               </span>
             </Link>
           </div>
-          <div className="flex space-x-8 items-center md:hidden">
+          <div className="flex items-center space-x-8 md:hidden">
             <Link to="/getStart" className="nav-links">
               <span className="rounded-md border-solid border-red-200 bg-orange-200 p-3">
                 Get started
               </span>
             </Link>
-            <div onClick={handleOpen} className="text-5xl cursor-pointer">
-            <GiHamburgerMenu />
+            <div onClick={handleOpen} className="cursor-pointer text-5xl">
+              <GiHamburgerMenu />
             </div>
           </div>
         </div>
