@@ -1,9 +1,13 @@
-import React from 'react'
+import dayjs from "dayjs";
 
-const calendar = () => {
-  return (
-    <div>calendar</div>
-  )
-}
+export const generateDate = (
+  month = dayjs().month(),
+  year = dayjs().year()
+) => {
+  const firstDateOfMonth = dayjs().year(year).month(month).startOf("month")
+  const lastDateOfMonth = dayjs().year(year).month(month).endOf("month")
 
-export default calendar
+  return (firstDateOfMonth, lastDateOfMonth)
+
+
+};
