@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { Listbox, Transition } from "@headlessui/react";
+import { Listbox, Switch, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
@@ -16,16 +16,57 @@ const guessedTimeZone = timeZones.find(
   (timeZone) => timeZone.name === dayjs.tz.guess()
 );
 
+const weekdays = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+
+const initialWeeklyHours = [
+  { day: 0, enabled: false, hours: [] },
+  { day: 1, enabled: true, hours: [{ startTime: 17 * 60, endTime: 18 * 60 }] },
+  { day: 2, enabled: true, hours: [{ startTime: 17 * 60, endTime: 18 * 60 }] },
+  { day: 3, enabled: true, hours: [{ startTime: 17 * 60, endTime: 18 * 60 }] },
+  {
+    day: 4,
+    enabled: true,
+    hours: [
+      { startTime: 17 * 60, endTime: 18 * 60 },
+      { startTime: 19 * 60, endTime: 21 * 60 },
+    ],
+  },
+  { day: 5, enabled: false, hours: [] },
+  { day: 6, enabled: false, hours: [] },
+];
+
 const SetWorkingHours = () => {
   const [selectedTimeZone, setSelectedTimeZone] = useState(guessedTimeZone);
+  const [weeklyHours, setWeeklyHours] = useState(initialWeeklyHours);
+
+  const handleWeekdaySwitchClick = (weekdayIdx) => {
+    const _weeklyHours = [...weeklyHours];
+    _weeklyHours.map((day, idx) => {
+      day.enabled = weekdayIdx === idx ? !day.enabled : day.enabled;
+      return day;
+    });
+    setWeeklyHours(_weeklyHours);
+  };
 
   return (
     <>
-      <h3 className="text-md te font-bold">Working hours</h3>
+      <h3 className="text-md font-bold">Working hours</h3>
       <h4 className="text-base font-bold uppercase">Active on</h4>
       <p>2 Event Types</p>
       <h4 className="text-base font-bold uppercase">Time zone</h4>
-      <Listbox value={selectedTimeZone} onChange={setSelectedTimeZone}>
+      <Listbox
+        value={selectedTimeZone}
+        onChange={setSelectedTimeZone}
+        className="z-10"
+      >
         <div className="relative mt-1">
           <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
             <span className="block truncate">{selectedTimeZone.name}</span>
@@ -75,15 +116,30 @@ const SetWorkingHours = () => {
           </Transition>
         </div>
       </Listbox>
-
-      {/* <p>Bangkok (UTC+7) __:__</p> */}
-      {/* <div className="w-48">
-        <ListGroup>
-          {weekdays.map((weekday) => (
-            <ListGroup.Item>{weekday}</ListGroup.Item>
-          ))}
-        </ListGroup>
-      </div> */}
+      <h4 className="text-base font-bold uppercase">Set your weekly hour</h4>
+      <ul>
+        {weekdays.map((weekday, weekdayIdx) => (
+          <li key={weekdayIdx}>
+            <Switch
+              checked={weeklyHours[weekdayIdx].enabled}
+              onChange={() => handleWeekdaySwitchClick(weekdayIdx)}
+              className={`${
+                weeklyHours[weekdayIdx].enabled ? "bg-blue-600" : "bg-gray-200"
+              } relative inline-flex h-6 w-11 items-center rounded-full`}
+            >
+              <span className="sr-only">Enable notifications</span>
+              <span
+                className={`${
+                  weeklyHours[weekdayIdx].enabled
+                    ? "translate-x-6"
+                    : "translate-x-1"
+                } inline-block h-4 w-4 transform rounded-full bg-white transition`}
+              />
+            </Switch>{" "}
+            {weekday}
+          </li>
+        ))}
+      </ul>
     </>
   );
 };

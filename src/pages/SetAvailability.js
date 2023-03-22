@@ -11,16 +11,6 @@ const schedules = [
   { id: 2, name: "Custom hours" },
 ];
 
-const weekdays = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-
 const SetAvailability = () => {
   const [selectedSchedule, setSelectedSchedule] = useState(schedules[0]);
 
