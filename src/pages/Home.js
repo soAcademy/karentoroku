@@ -1,22 +1,87 @@
-import logo from "../logo.svg";
+import React, { useEffect, useState } from "react";
+import Navbar from "../components/navbar/Navbar";
+import { GoogleLogin, GoogleLogout } from "react-google-login";
+import { gapi } from "gapi-script";
+import Finding from "../components/img/finding.png"
+import { useTypewriter, Cursor } from "react-simple-typewriter";
 
-export const Home = () => {
+const Home = () => {
+  const [text] = useTypewriter({
+    words: ["New Business", "New Community", "New Time Smart"],
+    loop: true,
+    typeSpeed: 20,
+    deleteSpeed: 10,
+    delaySpeed: 2000,
+  });
+
+  const clientId =
+    "535874581448-i06pmqjmtk6qc658nu3i6l9bt4p02lgo.apps.googleusercontent.com";
+
+  useEffect(() => {
+    const initClient = () => {
+      gapi.client.init({
+        clientId: clientId,
+        scope: "",
+      });
+    };
+    gapi.load("client:auth2", initClient);
+  }, []);
+
+  const onSuccess = (res) => {
+    console.log("success", res);
+  };
+
+  const onFailure = (res) => {
+    console.log("failed", res);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/pages/Home.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar />
+      <div className="w-full mt-5">
+        <div className="">
+          <div className="flex flex-col gap-5 mx-5">
+            <h4 className="text-lg font-normal">
+              WELCOME TO NEW ERA
+            </h4>
+            <h1 className="text-6xl font-bold">
+              This is area for
+            </h1>
+            <h2 className="text-4xl font-bold">
+              {text}
+              <Cursor
+              cursorBlinking="false"
+              cursorStyle="|"
+              cursorColor="#ff014f"
+            />
+            </h2>
+            <h3 className="mt-10 text-3xl font-bold">
+              The new way of approaching whom they are expert
+            </h3>
+            <span>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+              nulla turpis, cursus fringilla accumsan sed, auctor quis est.
+              Aenean ut accumsan sem. Vivamus vel leo in est hendrerit tempus
+              vel vel ex. Ut a lacus eu tellus luctus tincidunt sed quis dolor.
+            </span>
+            <div className="ml-5">
+              <GoogleLogin
+                clientId={clientId}
+                buttonText="Log in with Google"
+                onSuccess={onSuccess}
+                onFailure={onFailure}
+                cookiePolicy={"single_host_origin"}
+                isSignedIn={true}
+              />
+            </div>
+          </div>
+          <div className="mt-10 flex justify-center">
+            <img src={Finding} alt="Finding" className="w-2/3" />
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
+
+export default Home;
