@@ -1,18 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home } from "./pages/Home";
-import { AppNavbar } from "./components/AppNavbar";
-import { SetAvailability } from "./pages/SetAvailability";
-import { ErrorPage } from "./pages/ErrorPage";
+import Home from "./pages/Home"
+import Login from "./pages/Login"
+import GetStart from "./pages/GetStart"
 
 function App() {
   return (
     <BrowserRouter>
-      <AppNavbar />
+    <>
       <Routes>
-        <Route path="*" element={<ErrorPage />} />
-        <Route path="/SetAvailability" element={<SetAvailability />} />
-        <Route index element={<Home />} />
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/Login" element={<Login />} />
+        <Route exact path="/GetStart" element={<GetStart />} />
       </Routes>
+      </>
     </BrowserRouter>
   );
 }
