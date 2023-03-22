@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import { Listbox, Switch, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { PlusCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone"; // dependent on utc plugin
@@ -28,15 +29,27 @@ const weekdays = [
 
 const initialWeeklyHours = [
   { day: 0, enabled: false, hours: [] },
-  { day: 1, enabled: true, hours: [{ startTime: 17 * 60, endTime: 18 * 60 }] },
-  { day: 2, enabled: true, hours: [{ startTime: 17 * 60, endTime: 18 * 60 }] },
-  { day: 3, enabled: true, hours: [{ startTime: 17 * 60, endTime: 18 * 60 }] },
+  {
+    day: 1,
+    enabled: true,
+    hours: [{ startTime: "17:00", endTime: "18:00" }],
+  },
+  {
+    day: 2,
+    enabled: true,
+    hours: [{ startTime: "17:00", endTime: "18:00" }],
+  },
+  {
+    day: 3,
+    enabled: true,
+    hours: [{ startTime: "17:00", endTime: "18:00" }],
+  },
   {
     day: 4,
     enabled: true,
     hours: [
-      { startTime: 17 * 60, endTime: 18 * 60 },
-      { startTime: 19 * 60, endTime: 21 * 60 },
+      { startTime: "17:00", endTime: "18:00" },
+      { startTime: "19:00", endTime: "21:00" },
     ],
   },
   { day: 5, enabled: false, hours: [] },
@@ -53,6 +66,15 @@ const SetWorkingHours = () => {
       day.enabled = weekdayIdx === idx ? !day.enabled : day.enabled;
       return day;
     });
+    setWeeklyHours(_weeklyHours);
+  };
+
+  const handleTimeChange = (e, weekdayIdx, periodIdx, isStartTime) => {
+    e.preventDefault();
+    const _weeklyHours = [...weeklyHours];
+    isStartTime
+      ? (_weeklyHours[weekdayIdx].hours[periodIdx].startTime = e.target.value)
+      : (_weeklyHours[weekdayIdx].hours[periodIdx].endTime = e.target.value);
     setWeeklyHours(_weeklyHours);
   };
 
@@ -117,27 +139,62 @@ const SetWorkingHours = () => {
         </div>
       </Listbox>
       <h4 className="text-base font-bold uppercase">Set your weekly hour</h4>
-      <ul>
+      <ul className="flex flex-col gap-2">
         {weekdays.map((weekday, weekdayIdx) => (
-          <li key={weekdayIdx}>
-            <Switch
-              checked={weeklyHours[weekdayIdx].enabled}
-              onChange={() => handleWeekdaySwitchClick(weekdayIdx)}
-              className={`${
-                weeklyHours[weekdayIdx].enabled ? "bg-blue-600" : "bg-gray-200"
-              } relative inline-flex h-6 w-11 items-center rounded-full`}
-            >
-              <span className="sr-only">Enable notifications</span>
-              <span
+          <Fragment key={weekdayIdx}>
+            <li className="flex flex-row items-center justify-between gap-2">
+              <Switch
+                checked={weeklyHours[weekdayIdx].enabled}
+                onChange={() => handleWeekdaySwitchClick(weekdayIdx)}
                 className={`${
                   weeklyHours[weekdayIdx].enabled
-                    ? "translate-x-6"
-                    : "translate-x-1"
-                } inline-block h-4 w-4 transform rounded-full bg-white transition`}
-              />
-            </Switch>{" "}
-            {weekday}
-          </li>
+                    ? "bg-amber-600"
+                    : "bg-gray-200"
+                } relative inline-flex h-6 w-11 items-center rounded-full`}
+              >
+                <span className="sr-only">Enable {weekday}</span>
+                <span
+                  className={`${
+                    weeklyHours[weekdayIdx].enabled
+                      ? "translate-x-6"
+                      : "translate-x-1"
+                  } inline-block h-4 w-4 transform rounded-full bg-white transition`}
+                />
+              </Switch>
+              <div className="grow font-bold">{weekday}</div>
+              <button>
+                <PlusCircleIcon className="h-5 w-5 text-amber-600" />
+              </button>
+            </li>
+            <ul className="flex flex-col gap-2">
+              {weeklyHours[weekdayIdx].enabled &&
+                weeklyHours[weekdayIdx].hours.map((period, periodIdx) => (
+                  <li
+                    key={periodIdx}
+                    className="flex flex-row items-center justify-between gap-2"
+                  >
+                    <input
+                      type="time"
+                      defaultValue={period.startTime}
+                      onChange={(e) =>
+                        handleTimeChange(e, weekdayIdx, periodIdx, true)
+                      }
+                    />{" "}
+                    -{" "}
+                    <input
+                      type="time"
+                      defaultValue={period.endTime}
+                      onChange={(e) =>
+                        handleTimeChange(e, weekdayIdx, periodIdx, false)
+                      }
+                    />{" "}
+                    <button>
+                      <TrashIcon className="h-5 w-5 text-amber-600" />
+                    </button>
+                  </li>
+                ))}
+            </ul>
+          </Fragment>
         ))}
       </ul>
     </>
