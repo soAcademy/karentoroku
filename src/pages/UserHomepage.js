@@ -1,6 +1,7 @@
 import React from 'react'
 import UserNavbar from '../components/navbar/UserNavbar'
 import { BsPerson } from "react-icons/bs";
+import { Link } from 'react-router-dom';
 
 const UserHomepage = () => {
   return (
@@ -31,7 +32,9 @@ const UserHomepage = () => {
       <div className='mt-5 mx-5 bg-orange-200 border-2 border-orange-200 pl-5 pt-10'>
         <p className='text-2xl'>Meeting 30 min</p>
         <p className='text-gray-500 mt-2'>30mins, One-on-One</p>
-        <p className='text-orange-700 my-10 text-lg'>view booking page</p>
+        <div className='my-10'>
+        <Link to="/CustomerBooking" className='text-orange-700 text-lg'>view booking page</Link>
+        </div>      
       </div>
       <div className='mt-0.5 mx-5 bg-orange-200 border-2 border-orange-200 flex justify-around items-center py-2'>
         <p className='text-lg'>Copy Link</p>
@@ -44,7 +47,9 @@ const UserHomepage = () => {
       <div className='mt-5 mx-5 bg-orange-200 border-2 border-orange-200 pl-5 pt-10'>
         <p className='text-2xl'>Meeting 30 min</p>
         <p className='text-gray-500 mt-2'>30mins, One-on-One</p>
-        <p className='text-orange-700 my-10 text-lg'>view booking page</p>
+        <div className='my-10'>
+        <Link to="/CustomerBooking" className='text-orange-700 text-lg'>view booking page</Link>
+        </div>
       </div>
       <div className='mt-0.5 mx-5 bg-orange-200 border-2 border-orange-200 flex justify-around items-center py-2'>
         <p className='text-lg'>Copy Link</p>

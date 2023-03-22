@@ -4,6 +4,7 @@ import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { gapi } from "gapi-script";
 import Finding from "../components/img/finding.png"
 import { useTypewriter, Cursor } from "react-simple-typewriter";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [text] = useTypewriter({
@@ -47,7 +48,7 @@ const Home = () => {
             <h1 className="text-6xl font-bold">
               This is area for
             </h1>
-            <h2 className="text-4xl font-bold">
+            <h2 className="text-4xl font-bold text-orange-700">
               {text}
               <Cursor
               cursorBlinking="false"
@@ -64,15 +65,8 @@ const Home = () => {
               Aenean ut accumsan sem. Vivamus vel leo in est hendrerit tempus
               vel vel ex. Ut a lacus eu tellus luctus tincidunt sed quis dolor.
             </span>
-            <div className="ml-5">
-              <GoogleLogin
-                clientId={clientId}
-                buttonText="Log in with Google"
-                onSuccess={onSuccess}
-                onFailure={onFailure}
-                cookiePolicy={"single_host_origin"}
-                isSignedIn={true}
-              />
+            <div className="">
+              <Link to="/Login" className="text-orange-700 font-bold hover:text-blue-700 duration-200">Log in with Google</Link>
             </div>
           </div>
           <div className="mt-10 flex justify-center">
