@@ -1,4 +1,4 @@
-export const SetWorkingHours = () => {
+const SetWorkingHours = () => {
   return (
     <>
       <h3 className="text-md my-4 font-bold">Working hours</h3>
@@ -16,3 +16,5 @@ export const SetWorkingHours = () => {
     </>
   );
 };
+
+export default SetWorkingHours;
