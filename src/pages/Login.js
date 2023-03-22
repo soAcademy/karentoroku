@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../components/img/logocolor.png";
 import { Link } from "react-router-dom";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
+import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
+import UserHomepage from "./UserHomepage";
 
 const Login = () => {
   const [profile, setProfile] = useState(null);
@@ -29,32 +30,25 @@ const Login = () => {
     console.log("failed", res);
   };
 
-  const logOut = () => {
-    setProfile(null);
-  };
-
   return (
     <>
       {profile ? (
-        <div>
-          <img src={profile.imageUrl} alt="user image" />
-          <GoogleLogout
-            clientId={clientId}
-            buttonText="Log out"
-            onLogoutSuccess={logOut}
-          />
-        </div>
+        <UserHomepage />
       ) : (
         <>
-          <div className="m-auto mt-20">
+          <div className="mt-20 w-full">
             <div className="flex items-center justify-center">
-              <div >
+              <div>
                 <Link to="/">
-                <img src={Logo} alt="Company Logo" className="w-48 bg-white" />
+                  <img
+                    src={Logo}
+                    alt="Company Logo"
+                    className="w-48 bg-white"
+                  />
                 </Link>
               </div>
               <Link to="/">
-              <h1 className="text-4xl font-bold">KARENTOROKU</h1>
+                <h1 className="text-4xl font-bold">KARENTOROKU</h1>
               </Link>
             </div>
             <div className="p-3 text-center text-2xl">
@@ -75,7 +69,7 @@ const Login = () => {
             <div className="mt-10 text-center">
               <GoogleLogin
                 clientId={clientId}
-                buttonText="Sign up with Google"
+                buttonText="Log in with Google"
                 onSuccess={onSuccess}
                 onFailure={onFailure}
                 cookiePolicy={"single_host_origin"}
