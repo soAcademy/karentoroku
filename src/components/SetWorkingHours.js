@@ -9,6 +9,9 @@ import timezone from "dayjs/plugin/timezone"; // dependent on utc plugin
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
+const defaultStartTime = "09:00";
+const defaultEndTime = "12:00";
+
 const timeZones = Intl.supportedValuesOf("timeZone").map(
   (timeZoneValue, idx) => ({ id: idx + 1, name: timeZoneValue })
 );
@@ -69,12 +72,32 @@ const SetWorkingHours = () => {
     setWeeklyHours(_weeklyHours);
   };
 
+  const handlePlusClick = (weekdayIdx) => {
+    const _weeklyHours = [...weeklyHours];
+    _weeklyHours[weekdayIdx].hours = [
+      ..._weeklyHours[weekdayIdx].hours,
+      {
+        startTime: defaultStartTime,
+        endTime: defaultEndTime,
+      },
+    ].sort((a, b) => a.startTime.localeCompare(b.startTime));
+    setWeeklyHours(_weeklyHours);
+  };
+
   const handleTimeChange = (e, weekdayIdx, periodIdx, isStartTime) => {
     e.preventDefault();
     const _weeklyHours = [...weeklyHours];
     isStartTime
       ? (_weeklyHours[weekdayIdx].hours[periodIdx].startTime = e.target.value)
       : (_weeklyHours[weekdayIdx].hours[periodIdx].endTime = e.target.value);
+    setWeeklyHours(_weeklyHours);
+  };
+
+  const handleTrashClick = (weekdayIdx, periodIdx) => {
+    const _weeklyHours = [...weeklyHours];
+    _weeklyHours[weekdayIdx].hours = _weeklyHours[weekdayIdx].hours.filter(
+      (period, idx) => idx !== periodIdx
+    );
     setWeeklyHours(_weeklyHours);
   };
 
@@ -162,7 +185,7 @@ const SetWorkingHours = () => {
                 />
               </Switch>
               <div className="grow font-bold">{weekday}</div>
-              <button>
+              <button onClick={() => handlePlusClick(weekdayIdx)}>
                 <PlusCircleIcon className="h-5 w-5 text-amber-600" />
               </button>
             </li>
@@ -175,7 +198,7 @@ const SetWorkingHours = () => {
                   >
                     <input
                       type="time"
-                      defaultValue={period.startTime}
+                      value={period.startTime}
                       onChange={(e) =>
                         handleTimeChange(e, weekdayIdx, periodIdx, true)
                       }
@@ -183,12 +206,14 @@ const SetWorkingHours = () => {
                     -{" "}
                     <input
                       type="time"
-                      defaultValue={period.endTime}
+                      value={period.endTime}
                       onChange={(e) =>
                         handleTimeChange(e, weekdayIdx, periodIdx, false)
                       }
                     />{" "}
-                    <button>
+                    <button
+                      onClick={() => handleTrashClick(weekdayIdx, periodIdx)}
+                    >
                       <TrashIcon className="h-5 w-5 text-amber-600" />
                     </button>
                   </li>
