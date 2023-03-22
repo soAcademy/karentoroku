@@ -28,5 +28,7 @@ export const generateDate = (
     arrayOfDate.push(firstDateOfMonth.date(i));
   }
 
+  <div></div>
+
   return firstDateOfMonth, lastDateOfMonth;
 };
