@@ -4,6 +4,7 @@ import Login from "./pages/Login"
 import GetStart from "./pages/GetStart"
 import CustomerBooking from "./pages/CustomerBooking"
 import UserHomepage from "./pages/UserHomepage";
+import Pricing from "./pages/Pricing";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/GetStart" element={<GetStart />} />
         <Route exact path="/CustomerBooking" element={<CustomerBooking />} />
         <Route exact path="/UserHomepage" element={<UserHomepage />} />
+        <Route exact path="/Pricing" element={<Pricing />} />
       </Routes>
       </>
     </BrowserRouter>

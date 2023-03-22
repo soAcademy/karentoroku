@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 
-export const generateDate = (
+const Calendar = (
   month = dayjs().month(),
   year = dayjs().year()
 ) => {
@@ -8,27 +8,29 @@ export const generateDate = (
   const lastDateOfMonth = dayjs().year(year).month(month).endOf("month");
 
   // create prefix date
-  for (let i = 0; i < firstDateOfMonth.day(); i++) {
-    arrayOfDate.push(firstDateOfMonth.day(i));
-  }
+  // for (let i = 0; i < firstDateOfMonth.day(); i++) {
+  //   arrayOfDate.push(firstDateOfMonth.day(i));
+  // }
 
   //generate current date
-  const arrayOfDate = [];
-  for (let i = firstDateOfMonth.date(); i <= lastDateOfMonth.date(); i++) {
-    arrayOfDate.push(firstDateOfMonth.date(i));
-  }
+  // const arrayOfDate = [];
+  // for (let i = firstDateOfMonth.date(); i <= lastDateOfMonth.date(); i++) {
+  //   arrayOfDate.push(firstDateOfMonth.date(i));
+  // }
 
-  const remaining = 42 - arrayOfDate.length;
+  // const remaining = 42 - arrayOfDate.length;
 
-  for (
-    let i = lastDateOfMonth.date() + 1;
-    i < lastDateOfMonth.date() + remaining;
-    i++
-  ) {
-    arrayOfDate.push(firstDateOfMonth.date(i));
-  }
+  // for (
+  //   let i = lastDateOfMonth.date() + 1;
+  //   i < lastDateOfMonth.date() + remaining;
+  //   i++
+  // ) {
+  //   arrayOfDate.push(firstDateOfMonth.date(i));
+  // }
 
-  <div></div>
+  // <div></div>
 
   return firstDateOfMonth, lastDateOfMonth;
 };
+
+export default Calendar;
