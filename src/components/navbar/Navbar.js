@@ -23,7 +23,8 @@ const Navbar = () => {
             <Link to="/" className="nav-links">
               Home
             </Link>
-            <Link to="/pricing" className="nav-links">
+            {/* Don't forget to correct items */}
+            <Link to="/customerTimeConfirm" className="nav-links"> 
               Pricing
             </Link>
             <Link to="/pricing" className="nav-links">
