@@ -12,6 +12,8 @@ const Navbar = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  
   return (
     <>
       <nav className="mx-auto">

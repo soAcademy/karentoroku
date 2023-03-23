@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../img/logocolor.png";
 import { BsPerson } from "react-icons/bs";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
-import { gapi } from "gapi-script";
 
 const UserNavbar = () => {
   const [open, setOpen] = useState(false);
@@ -15,11 +13,9 @@ const UserNavbar = () => {
   };
 
   const logOut = () => {
-    setOpen(false);
+    localStorage.clear()
+    window.location.reload();
   };
-
-  const clientId =
-    "535874581448-8fdlid2gjtsh3a9n69h3o97ti3kf0bul.apps.googleusercontent.com";
 
   return (
     <>
@@ -84,11 +80,11 @@ const UserNavbar = () => {
                 Sharing Your Link
               </Link>
               <div>
-                <GoogleLogout
-                  clientId={clientId}
-                  buttonText="Log out"
-                  onLogoutSuccess={logOut}
-                />
+                <button
+                onClick={logOut}
+                >
+                  Logout
+                </button>
               </div>
             </div>
           </div>
