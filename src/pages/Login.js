@@ -1,38 +1,31 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../components/img/logocolor.png";
 import { Link } from "react-router-dom";
-import { GoogleLogin } from "react-google-login";
-import { gapi } from "gapi-script";
 import UserHomepage from "./UserHomepage";
+import { GoogleButton } from "react-google-button";
+import { auth, provider } from "../components/auth/config";
+import { signInWithPopup } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [profile, setProfile] = useState(null);
+  const [value, setValue] = useState("");
+  const navigate = useNavigate;
 
-  const clientId =
-    "535874581448-i06pmqjmtk6qc658nu3i6l9bt4p02lgo.apps.googleusercontent.com";
+  const handleClick = () => {
+    signInWithPopup(auth, provider).then((data) => {
+      setValue(data.user.email);
+      localStorage.setItem("email", data.user.email);
+    });
+  };
 
   useEffect(() => {
-    const initClient = () => {
-      gapi.client.init({
-        clientId: clientId,
-        scope: "",
-      });
-    };
-    gapi.load("client:auth2", initClient);
+    setValue(localStorage.getItem("email"));
   }, []);
 
-  const onSuccess = (res) => {
-    setProfile(res.profileObj);
-    console.log("success", res);
-  };
-
-  const onFailure = (res) => {
-    console.log("failed", res);
-  };
 
   return (
     <>
-      {profile ? (
+      {value ? (
         <UserHomepage />
       ) : (
         <>
@@ -66,15 +59,8 @@ const Login = () => {
             <button className="mt-5 w-full rounded-full bg-orange-700 p-5 text-xl text-white">
               Continue
             </button>
-            <div className="mt-10 text-center">
-              <GoogleLogin
-                clientId={clientId}
-                buttonText="Log in with Google"
-                onSuccess={onSuccess}
-                onFailure={onFailure}
-                cookiePolicy={"single_host_origin"}
-                isSignedIn={true}
-              />
+            <div className="mt-10 flex items-center justify-center">
+              <GoogleButton onClick={handleClick} />
             </div>
             <div className="mt-20 flex">
               <div>Don't have an account?</div>
