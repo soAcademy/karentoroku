@@ -40,10 +40,10 @@ const UserNavbar = () => {
         <div className="flex items-center justify-between border-b-[1px] border-black px-2 py-3">
           <div className="flex cursor-pointer items-center space-x-5">
             <img src={Logo} alt="Company Logo" className="w-20 bg-white" />
-            <div className="text-xl">Home</div>
+            <div className="text-xl" >Home</div>
           </div>
           <div className="hidden md:flex md:space-x-5 lg:space-x-8">
-            <Link to="/accountSetting" className="nav-links">
+            <Link to="/aboutus" className="nav-links">
               Account Settings
             </Link>
             <Link to="/billing" className="nav-links">
@@ -75,7 +75,7 @@ const UserNavbar = () => {
         {open && (
           <div>
             <div className="absolute flex w-full flex-col space-y-3 self-end bg-orange-100 py-8 pl-3 font-bold drop-shadow-2xl md:hidden">
-              <Link to="/accountSetting" className="nav-links">
+              <Link to="/aboutus" className="nav-links">
                 Account Settings
               </Link>
               <Link to="/billing" className="nav-links">
