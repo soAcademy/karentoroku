@@ -25,7 +25,7 @@ const Navbar = () => {
             <Link to="/userProfile" className="nav-links">
               Pricing
             </Link>
-            <Link to="/Dashboard" className="nav-links">
+            <Link to="/dashboard" className="nav-links">
               User Dashboard
             </Link>
             <Link to="/faq" className="nav-links">
