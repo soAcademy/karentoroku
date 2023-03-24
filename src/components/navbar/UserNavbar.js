@@ -2,20 +2,37 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../img/logocolor.png";
 import { BsPerson } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const UserNavbar = () => {
   const [open, setOpen] = useState(false);
+  const [changeUser, setChangeUser] = useState(null)
+
   const handleOpen = () => {
     setOpen(!open);
   };
   const handleClose = () => {
     setOpen(false);
   };
+  let navigate = useNavigate()
+  const toHome = () => {
+    navigate('/')
+  }
 
   const logOut = () => {
+    try {
     localStorage.clear()
     window.location.reload();
+    toHome()
+    }catch(error) {
+      alert(error)
+    }
   };
+
+
+  // if (changeUser) {
+  //   return navigate('/')
+  // }
 
   return (
     <>
