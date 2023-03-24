@@ -3,6 +3,7 @@ import Home from "./pages/Home"
 import Login from "./pages/Login"
 import GetStart from "./pages/GetStart"
 import UserHomepage from "./pages/UserHomepage";
+import Aboutus from "./pages/Aboutus";
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/Login" element={<Login />} />
         <Route exact path="/GetStart" element={<GetStart />} />
         <Route exact path="/UserHomepage" element={<UserHomepage />} />
+        <Route exact path="/Aboutus" element={<Aboutus />} />
       </Routes>
       </>
     </BrowserRouter>
