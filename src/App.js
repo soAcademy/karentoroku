@@ -5,6 +5,9 @@ import GetStart from "./pages/GetStart";
 import Dashboard from "./pages/Dashboard";
 import ErrorPage from "./pages/ErrorPage";
 import SetAvailability from "./pages/SetAvailability";
+import UserProfile from "./pages/UserProfile";
+import UserGroupSetting from "./pages/UserGroupSetting";
+import UserGroupConfirm from "./pages/UserGroupConfirm";
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
           <Route exact path="/GetStart" element={<GetStart />} />
           <Route path="/SetAvailability" element={<SetAvailability />} />
+          <Route path="/UserProfile" element={<UserProfile />} />
+          <Route path="UserGroupSetting" element={<UserGroupSetting />} />
+          <Route path="UserGroupConfirm" element={<UserGroupConfirm />} />
         </Routes>
       </>
     </BrowserRouter>
