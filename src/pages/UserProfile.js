@@ -12,7 +12,7 @@ const UserProfile = () => {
             Group
           </button>
         </div>
-        <div className=" py-28 text-center">Picture</div>
+        <div className=" my-10 w-36 h-36 border-2 bg-gray-200 flex mx-auto items-center text-center justify-center rounded-full">Pic</div>
         <div className="mx-2 bg-orange-100 rounded-md mt-5">
           <form className="flex flex-col space-y-3">
           <div className="p-4 flex flex-col space-y-2">
