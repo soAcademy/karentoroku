@@ -3,6 +3,7 @@ import UserNavbar from '../components/navbar/UserNavbar'
 import { BsPerson } from "react-icons/bs";
 
 const UserHomepage = () => {
+  
   return (
     <>
     <UserNavbar />

@@ -1,56 +1,28 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../components/img/logocolor.png";
 import { Link } from "react-router-dom";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
-import { gapi } from "gapi-script";
+import UserHomepage from "./UserHomepage";
+import { GoogleButton } from "react-google-button";
+import { auth, provider } from "../components/auth/config";
+import { signInWithPopup } from "firebase/auth";
 
 const GetStart = () => {
-  const [profile, setProfile] = useState(null);
+  const [value, setValue] = useState("");
 
-  const clientId =
-    "535874581448-i06pmqjmtk6qc658nu3i6l9bt4p02lgo.apps.googleusercontent.com";
-
-  useEffect(() => {
-    const initClient = () => {
-      gapi.client.init({
-        clientId: clientId,
-        scope: "",
-      });
-    };
-    gapi.load("client:auth2", initClient);
-  }, []);
-
-  const onSuccess = (res) => {
-    setProfile(res.profileObj);
-    console.log("success", res);
-  };
-
-  const onFailure = (res) => {
-    console.log("failed", res);
-  };
-
-  const logOut = () => {
-    setProfile(null);
+  const handleClick = () => {
+    signInWithPopup(auth, provider).then((data) => {
+      setValue(data.user.email);
+      localStorage.setItem("email", data.user.email);
+    });
   };
 
   return (
     <>
-      {profile ? (
-        <div>
-          <img src={profile.imageUrl} alt="user image" />
-          <GoogleLogout
-            clientId={clientId}
-            buttonText="Log out"
-            onLogoutSuccess={logOut}
-          />
-        </div>
-      ) : (
-        <>
           <div className="m-auto mt-20">
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center space-x-3">
               <div >
                 <Link to="/">
-                <img src={Logo} alt="Company Logo" className="w-48 bg-white" />
+                <img src={Logo} alt="Company Logo" className="w-20 bg-white" />
                 </Link>
               </div>
               <Link to="/">
@@ -73,14 +45,7 @@ const GetStart = () => {
               Get Started
             </button>
             <div className="mt-10 text-center">
-              <GoogleLogin
-                clientId={clientId}
-                buttonText="Sign up with Google"
-                onSuccess={onSuccess}
-                onFailure={onFailure}
-                cookiePolicy={"single_host_origin"}
-                isSignedIn={true}
-              />
+            <GoogleButton onClick={handleClick} />
             </div>
             <div className="mt-20 flex">
               <div>Already have an account?</div>
@@ -89,8 +54,6 @@ const GetStart = () => {
               </Link>
             </div>
           </div>
-        </>
-      )}
     </>
   );
 };

@@ -7,36 +7,36 @@ import { auth, provider } from "../components/auth/config";
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
+
+
 const Login = () => {
-  const [value, setValue] = useState("");
-  const navigate = useNavigate;
+  const [currentUser, setCurrentUser] = useState(null)
 
   const handleClick = () => {
+    try{
     signInWithPopup(auth, provider).then((data) => {
-      setValue(data.user.email);
       localStorage.setItem("email", data.user.email);
-    });
+    })
+    setCurrentUser(true)
+  }catch(error) {
+    alert(error)
+  }
   };
-
-  useEffect(() => {
-    setValue(localStorage.getItem("email"));
-  }, []);
-
+let navigate = useNavigate()
+  if (currentUser) {
+    return navigate('/UserHomepage')
+  }
 
   return (
     <>
-      {value ? (
-        <UserHomepage />
-      ) : (
-        <>
           <div className="mt-20 w-full">
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center space-x-3">
               <div>
                 <Link to="/">
                   <img
                     src={Logo}
                     alt="Company Logo"
-                    className="w-48 bg-white"
+                    className="w-20 bg-white"
                   />
                 </Link>
               </div>
@@ -69,8 +69,6 @@ const Login = () => {
               </Link>
             </div>
           </div>
-        </>
-      )}
     </>
   );
 };
