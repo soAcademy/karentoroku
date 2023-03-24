@@ -1,7 +1,18 @@
 import React from "react";
 import Navbar from "../components/navbar/Navbar";
+import { useNavigate } from "react-router-dom";
 
 const UserGroupSetting = () => {
+  let navigate = useNavigate()
+
+  const userDashboard = () => {
+    navigate('/Dashboard')
+  }
+
+  const groupConfirm = () => {
+    navigate('/UserGroupConfirm')
+  }
+
   return (
     <>
       <Navbar />
@@ -132,11 +143,13 @@ const UserGroupSetting = () => {
       </div>
       <div className="py-5">
       <button
+      onClick={groupConfirm}
         className="mt-5 text-center border-2 border-orange-700 text-xl text-white py-3 px-40 items-center bg-orange-700 rounded-full mx-auto flex"
         >
           Continue
         </button>
         <button
+        onClick={userDashboard}
         className="mt-5 text-center border-2 text-xl py-3 px-40 items-center bg-gray-400 rounded-full mx-auto flex"
         >
           Add more user

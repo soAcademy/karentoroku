@@ -8,6 +8,9 @@ import SetAvailability from "./pages/SetAvailability";
 import UserProfile from "./pages/UserProfile";
 import UserGroupSetting from "./pages/UserGroupSetting";
 import UserGroupConfirm from "./pages/UserGroupConfirm";
+import Pricing from "./pages/Pricing";
+import Faq from "./pages/Faq";
+import Aboutus from "./pages/Aboutus";
 
 function App() {
   return (
@@ -24,6 +27,9 @@ function App() {
           <Route path="/UserProfile" element={<UserProfile />} />
           <Route path="UserGroupSetting" element={<UserGroupSetting />} />
           <Route path="UserGroupConfirm" element={<UserGroupConfirm />} />
+          <Route path="Pricing" element={<Pricing />} />
+          <Route path="Faq" element={<Faq />} />
+          <Route path="Aboutus" element={<Aboutus />} />
         </Routes>
       </>
     </BrowserRouter>
