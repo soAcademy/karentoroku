@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../components/img/logocolor.png";
 import { Link } from "react-router-dom";
-import UserHomepage from "./UserHomepage";
 import { GoogleButton } from "react-google-button";
 import { auth, provider } from "../components/auth/config";
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-
-
 
 const Login = () => {
   const [currentUser, setCurrentUser] = useState(null)
@@ -22,6 +19,8 @@ const Login = () => {
     alert(error)
   }
   };
+
+
 let navigate = useNavigate()
   if (currentUser) {
     return navigate('/UserHomepage')
