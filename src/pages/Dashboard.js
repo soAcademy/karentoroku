@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import _ from "lodash";
 
 //หลังบ้านให้ใช้ findmany where and มี 4 เงื่อนไข job and start time and location
