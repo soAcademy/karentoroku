@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar/Navbar";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
-import { gapi } from "gapi-script";
 import Finding from "../components/img/finding.png"
 import { useTypewriter, Cursor } from "react-simple-typewriter";
+import { GoogleButton } from "react-google-button";
+import { auth, provider } from "../components/auth/config";
+import { signInWithPopup } from "firebase/auth";
 
 const Home = () => {
   const [text] = useTypewriter({
@@ -14,26 +15,15 @@ const Home = () => {
     delaySpeed: 2000,
   });
 
-  const clientId =
-    "535874581448-i06pmqjmtk6qc658nu3i6l9bt4p02lgo.apps.googleusercontent.com";
+  const handleClick = () => {
+    signInWithPopup(auth, provider).then((data) => {
+      localStorage.setItem("email", data.user.email);
+    });
+  };
 
   useEffect(() => {
-    const initClient = () => {
-      gapi.client.init({
-        clientId: clientId,
-        scope: "",
-      });
-    };
-    gapi.load("client:auth2", initClient);
-  }, []);
-
-  const onSuccess = (res) => {
-    console.log("success", res);
-  };
-
-  const onFailure = (res) => {
-    console.log("failed", res);
-  };
+    localStorage.setItem("status",JSON.stringify("1"))
+  },[])
 
   return (
     <>
@@ -65,14 +55,7 @@ const Home = () => {
               vel vel ex. Ut a lacus eu tellus luctus tincidunt sed quis dolor.
             </span>
             <div className="ml-5">
-              <GoogleLogin
-                clientId={clientId}
-                buttonText="Log in with Google"
-                onSuccess={onSuccess}
-                onFailure={onFailure}
-                cookiePolicy={"single_host_origin"}
-                isSignedIn={true}
-              />
+            <GoogleButton onClick={handleClick} />
             </div>
           </div>
           <div className="mt-10 flex justify-center">

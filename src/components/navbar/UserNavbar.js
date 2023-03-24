@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 const UserNavbar = () => {
   const [open, setOpen] = useState(false);
-  const [changeUser, setChangeUser] = useState(null)
 
   const handleOpen = () => {
     setOpen(!open);
@@ -22,17 +21,11 @@ const UserNavbar = () => {
   const logOut = () => {
     try {
     localStorage.clear()
-    window.location.reload();
-    toHome()
+    window.location.reload()
     }catch(error) {
       alert(error)
     }
   };
-
-
-  // if (changeUser) {
-  //   return navigate('/')
-  // }
 
   return (
     <>
@@ -40,7 +33,7 @@ const UserNavbar = () => {
         <div className="flex items-center justify-between border-b-[1px] border-black px-2 py-3">
           <div className="flex cursor-pointer items-center space-x-5">
             <img src={Logo} alt="Company Logo" className="w-20 bg-white" />
-            <div className="text-xl" >Home</div>
+            <div className="text-xl" onClick={toHome}>Home</div>
           </div>
           <div className="hidden md:flex md:space-x-5 lg:space-x-8">
             <Link to="/aboutus" className="nav-links">
