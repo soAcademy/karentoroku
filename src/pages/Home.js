@@ -47,7 +47,7 @@ const Home = () => {
             <h1 className="text-6xl font-bold">
               This is area for
             </h1>
-            <h2 className="text-4xl font-bold">
+            <h2 className="text-4xl font-bold text-orange-700">
               {text}
               <Cursor
               cursorBlinking="false"
