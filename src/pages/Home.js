@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar/Navbar";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
-import { gapi } from "gapi-script";
 import Finding from "../components/img/finding.png"
 import { useTypewriter, Cursor } from "react-simple-typewriter";
+import { GoogleButton } from "react-google-button";
+import { auth, provider } from "../components/auth/config";
+import { signInWithPopup } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+
+  const [currentUser, setCurrentUser] = useState(null)
+
   const [text] = useTypewriter({
     words: ["New Business", "New Community", "New Time Smart"],
     loop: true,
@@ -14,26 +19,25 @@ const Home = () => {
     delaySpeed: 2000,
   });
 
-  const clientId =
-    "535874581448-i06pmqjmtk6qc658nu3i6l9bt4p02lgo.apps.googleusercontent.com";
+const handleClick = () => {
+    try{
+    signInWithPopup(auth, provider).then((data) => {
+      localStorage.setItem("email", data.user.email);
+    })
+    setCurrentUser(true)
+  }catch(error) {
+    alert(error)
+  }
+  };
 
   useEffect(() => {
-    const initClient = () => {
-      gapi.client.init({
-        clientId: clientId,
-        scope: "",
-      });
-    };
-    gapi.load("client:auth2", initClient);
-  }, []);
+    localStorage.setItem("status",JSON.stringify("1"))
+  },[])
 
-  const onSuccess = (res) => {
-    console.log("success", res);
-  };
-
-  const onFailure = (res) => {
-    console.log("failed", res);
-  };
+  let navigate = useNavigate()
+  if (currentUser) {
+    return navigate('/UserHomepage')
+  }
 
   return (
     <>
@@ -47,7 +51,7 @@ const Home = () => {
             <h1 className="text-6xl font-bold">
               This is area for
             </h1>
-            <h2 className="text-4xl font-bold">
+            <h2 className="text-4xl font-bold text-orange-700">
               {text}
               <Cursor
               cursorBlinking="false"
@@ -64,15 +68,8 @@ const Home = () => {
               Aenean ut accumsan sem. Vivamus vel leo in est hendrerit tempus
               vel vel ex. Ut a lacus eu tellus luctus tincidunt sed quis dolor.
             </span>
-            <div className="ml-5">
-              <GoogleLogin
-                clientId={clientId}
-                buttonText="Log in with Google"
-                onSuccess={onSuccess}
-                onFailure={onFailure}
-                cookiePolicy={"single_host_origin"}
-                isSignedIn={true}
-              />
+            <div className="">
+            <GoogleButton onClick={handleClick} />
             </div>
           </div>
           <div className="mt-10 flex justify-center">
