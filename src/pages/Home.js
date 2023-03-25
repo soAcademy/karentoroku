@@ -5,8 +5,12 @@ import { useTypewriter, Cursor } from "react-simple-typewriter";
 import { GoogleButton } from "react-google-button";
 import { auth, provider } from "../components/auth/config";
 import { signInWithPopup } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+
+  const [currentUser, setCurrentUser] = useState(null)
+
   const [text] = useTypewriter({
     words: ["New Business", "New Community", "New Time Smart"],
     loop: true,
@@ -15,15 +19,25 @@ const Home = () => {
     delaySpeed: 2000,
   });
 
-  const handleClick = () => {
+const handleClick = () => {
+    try{
     signInWithPopup(auth, provider).then((data) => {
       localStorage.setItem("email", data.user.email);
-    });
+    })
+    setCurrentUser(true)
+  }catch(error) {
+    alert(error)
+  }
   };
 
   useEffect(() => {
     localStorage.setItem("status",JSON.stringify("1"))
   },[])
+
+  let navigate = useNavigate()
+  if (currentUser) {
+    return navigate('/UserHomepage')
+  }
 
   return (
     <>
@@ -54,7 +68,7 @@ const Home = () => {
               Aenean ut accumsan sem. Vivamus vel leo in est hendrerit tempus
               vel vel ex. Ut a lacus eu tellus luctus tincidunt sed quis dolor.
             </span>
-            <div className="ml-5">
+            <div className="">
             <GoogleButton onClick={handleClick} />
             </div>
           </div>
