@@ -1,62 +1,74 @@
-import React from 'react'
-import UserNavbar from '../components/navbar/UserNavbar'
+import React, { useState, useEffect } from "react";
+import UserNavbar from "../components/navbar/UserNavbar";
 import { BsPerson } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const UserHomepage = () => {
+  
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+  setValue(localStorage.getItem("status"));
+},[])
+
+
+  let navigate = useNavigate();
+  if (!value) {
+    return navigate("/");
+  }
+
   return (
     <>
-    <UserNavbar />
-    <div className='mt-5'>
-      <span className='text-2xl mx-5'>KARENTOROKU</span>
-      <div className='flex mt-8 space-x-5 p-2 border-b-[2px] border-gray'>
-        <div className='ml-3 hover:font-bold cursor-pointer duration-300'>Event Types</div>
-        <div className='hover:font-bold cursor-pointer duration-300'>Scheduled Events</div>
-      </div>
-      <div className='flex space-x-16 items-center border-b-[2px] border-gray'>
-        <div className='text-6xl my-6 ml-5'>
-        <BsPerson />
+      <UserNavbar />
+      <div className="mt-5">
+        <span className="mx-5 text-2xl">KARENTOROKU</span>
+        <div className="border-gray mt-8 flex space-x-5 border-b-[2px] p-2">
+          <div className="ml-3 cursor-pointer duration-300 hover:font-bold">
+            Event Types
+          </div>
+          <div className="cursor-pointer duration-300 hover:font-bold">
+            Scheduled Events
+          </div>
         </div>
-        <div>
-          <p className='text-xl'>username</p>
-          <p className='text-orange-700 text-xl'>karentoroku.com/username</p>
+        <div className="border-gray flex items-center space-x-16 border-b-[2px]">
+          <div className="my-6 ml-5 text-6xl">
+            <BsPerson />
+          </div>
+          <div>
+            <p className="text-xl">username</p>
+            <p className="text-xl text-orange-700">karentoroku.com/username</p>
+          </div>
+        </div>
+        <div className="text-center">
+          <button className="my-5 rounded-full border-2 px-60 py-5 text-center text-xl">
+            + New Event Type
+          </button>
+        </div>
+        <div className="mx-5 mt-5 border-2 border-orange-200 bg-orange-200 pl-5 pt-10">
+          <p className="text-2xl">Meeting 30 min</p>
+          <p className="mt-2 text-gray-500">30mins, One-on-One</p>
+          <p className="my-10 text-lg text-orange-700">view booking page</p>
+        </div>
+        <div className="mx-5 mt-0.5 flex items-center justify-around border-2 border-orange-200 bg-orange-200 py-2">
+          <p className="text-lg">Copy Link</p>
+          <button className="rounded-full border-2 border-orange-700 bg-white px-10 py-3 text-lg">
+            Share
+          </button>
+        </div>
+        <div className="mx-5 mt-5 border-2 border-orange-200 bg-orange-200 pl-5 pt-10">
+          <p className="text-2xl">Meeting 30 min</p>
+          <p className="mt-2 text-gray-500">30mins, One-on-One</p>
+          <p className="my-10 text-lg text-orange-700">view booking page</p>
+        </div>
+        <div className="mx-5 mt-0.5 flex items-center justify-around border-2 border-orange-200 bg-orange-200 py-2">
+          <p className="text-lg">Copy Link</p>
+          <button className="rounded-full border-2 border-orange-700 bg-white px-10 py-3 text-lg">
+            Share
+          </button>
         </div>
       </div>
-      <div className='text-center'>
-      <button
-      className='text-xl px-60 py-5 my-5 rounded-full text-center border-2'
-      >
-        + New Event Type
-      </button>
-      </div>
-      <div className='mt-5 mx-5 bg-orange-200 border-2 border-orange-200 pl-5 pt-10'>
-        <p className='text-2xl'>Meeting 30 min</p>
-        <p className='text-gray-500 mt-2'>30mins, One-on-One</p>
-        <p className='text-orange-700 my-10 text-lg'>view booking page</p>
-      </div>
-      <div className='mt-0.5 mx-5 bg-orange-200 border-2 border-orange-200 flex justify-around items-center py-2'>
-        <p className='text-lg'>Copy Link</p>
-        <button
-          className='bg-white px-10 py-3 border-orange-700 border-2 rounded-full text-lg'
-        >
-          Share
-        </button>
-      </div>
-      <div className='mt-5 mx-5 bg-orange-200 border-2 border-orange-200 pl-5 pt-10'>
-        <p className='text-2xl'>Meeting 30 min</p>
-        <p className='text-gray-500 mt-2'>30mins, One-on-One</p>
-        <p className='text-orange-700 my-10 text-lg'>view booking page</p>
-      </div>
-      <div className='mt-0.5 mx-5 bg-orange-200 border-2 border-orange-200 flex justify-around items-center py-2'>
-        <p className='text-lg'>Copy Link</p>
-        <button
-          className='bg-white px-10 py-3 border-orange-700 border-2 rounded-full text-lg'
-        >
-          Share
-        </button>
-      </div>
-    </div>
     </>
-  )
-}
+  );
+};
 
-export default UserHomepage
+export default UserHomepage;
