@@ -1,7 +1,9 @@
 import React, { useMemo } from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import _ from "lodash";
+import Navbar from "../components/navbar/Navbar";
+import UserGroupSetting from "./UserGroupSetting";
+import { useNavigate } from "react-router-dom";
 
 //หลังบ้านให้ใช้ findmany where and มี 4 เงื่อนไข job and start time and location
 
@@ -54,6 +56,11 @@ const Dashboard = () => {
   const [time, setTime] = useState("All day");
   const [location, setLocation] = useState("All location");
 
+  let navigate = useNavigate()
+  const userGroup = () => {
+    navigate('/UserGroupSetting')
+  }
+
   // const getMeetingsGroupByDate = useMemo(() => {
   //   return _.groupBy(meetings, (meeting) => meeting.date);
   // }, [meetings]);
@@ -85,7 +92,15 @@ const Dashboard = () => {
   console.log("groupByDate", groupByDate);
   return (
     <>
-      <div className="text-xl font-bold">KARENTOROKU BOARD</div>
+      <Navbar />
+      <div className=" mt-3 border-t-[1px] border-gray-500">
+        <div className="mx-4 flex items-center justify-between pt-5">
+          <h1 className="text-xl">KARENTOROKU USER</h1>
+          <button className="rounded-lg bg-gray-300 py-2 px-7 text-center text-base " onClick={userGroup}>
+            Group<br />Management
+          </button>
+        </div>
+        </div>
       <div>
         <form className="mx-auto mt-8 w-full bg-orange-200 p-6">
           <div className="flex flex-wrap gap-2">
