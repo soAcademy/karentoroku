@@ -7,24 +7,25 @@ import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [currentUser, setCurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState()
 
-  const handleClick = () => {
+  const handleClick = async () => {
     try{
     signInWithPopup(auth, provider).then((data) => {
+      setCurrentUser(data.user.email)
       localStorage.setItem("email", data.user.email);
     })
-    setCurrentUser(true)
   }catch(error) {
     alert(error)
   }
   };
 
-
 let navigate = useNavigate()
+useEffect(() => {
   if (currentUser) {
     return navigate('/UserHomepage')
   }
+},[currentUser])
 
   return (
     <>
