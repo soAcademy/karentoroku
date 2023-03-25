@@ -1,14 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "../components/img/logocolor.png";
 import { Link } from "react-router-dom";
+import { GoogleButton } from "react-google-button";
+import { auth, provider } from "../components/auth/config";
+import { signInWithPopup } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const UserPassLogin = () => {
   const [toggle, setToggle] = useState(false);
+  const [currentUser, setCurrentUser] = useState()
+
+  const handleClick = async () => {
+    try{
+    signInWithPopup(auth, provider).then((data) => {
+      setCurrentUser(data.user.email)
+      localStorage.setItem("email", data.user.email);
+    })
+  }catch(error) {
+    alert(error)
+  }
+  };
+
+let navigate = useNavigate()
+useEffect(() => {
+  if (currentUser) {
+    return navigate('/UserHomepage')
+  }
+},[currentUser])
 
   return (
     <>
-      {toggle ? (
-        <>
           <div className="mt-10 flex items-center justify-center space-x-5">
             <div>
               <Link to="/">
@@ -56,40 +77,6 @@ const UserPassLogin = () => {
               Continue
             </button>
           </div>
-        </>
-      ) : (
-        <>
-          <div className="mt-40 flex items-center justify-center space-x-5">
-            <div>
-              <Link to="/">
-                <img src={Logo} alt="Company Logo" className="w-20 bg-white" />
-              </Link>
-            </div>
-            <Link to="/">
-              <h1 className="text-4xl font-bold">KARENTOROKU</h1>
-            </Link>
-          </div>
-          <div className="mt-14 flex items-center justify-center text-3xl">
-            Hi,{"  "}john@gamil.com!
-          </div>
-          <div className="mx-8 mt-10 rounded-2xl border-[1px] border-gray-500 py-8 px-5 text-xl">
-            <div>
-              The easiest way for you to sign up is with Google. This will
-              automatically connect your calendar so you can start using
-              Karentoroku right way!
-            </div>
-            <div className="mt-6 space-x-3">
-              <span>Prefer to create an account with a password?</span>
-              <span
-                className="cursor-pointer text-blue-600"
-                onClick={setToggle}
-              >
-                Click here
-              </span>
-            </div>
-          </div>
-        </>
-      )}
     </>
   );
 };
