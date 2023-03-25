@@ -11,8 +11,12 @@ import UserGroupConfirm from "./pages/UserGroupConfirm";
 import Pricing from "./pages/Pricing";
 import Faq from "./pages/Faq";
 import Aboutus from "./pages/Aboutus";
+import UserHomepage from "./pages/UserHomepage";
 
 function App() {
+
+  
+
   return (
     <BrowserRouter>
       <>
@@ -30,6 +34,7 @@ function App() {
           <Route path="Pricing" element={<Pricing />} />
           <Route path="Faq" element={<Faq />} />
           <Route path="Aboutus" element={<Aboutus />} />
+          <Route path="UserHomepage" element={<UserHomepage />} />
         </Routes>
       </>
     </BrowserRouter>
