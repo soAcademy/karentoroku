@@ -5,6 +5,7 @@ import GetStart from "./pages/GetStart";
 import Dashboard from "./pages/Dashboard";
 import ErrorPage from "./pages/ErrorPage";
 import SetAvailability from "./pages/SetAvailability";
+import UserPassLogin from "./pages/UserPassLogin"
 import EventType from "./pages/EventType";
 import EventTypeP2 from "./pages/EventTypeP2";
 import EventConfirm from "./pages/EventConfirm";
@@ -31,6 +32,7 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
           <Route exact path="/GetStart" element={<GetStart />} />
           <Route path="/SetAvailability" element={<SetAvailability />} />
+          <Route path="/UserPassLogin" element={<UserPassLogin />} />
           <Route exact path="/EventType" element={<EventType />} />
           <Route exact path="/EventTypeP2" element={<EventTypeP2 />} />
           <Route exact path="/EventConfirm" element={<EventConfirm />} />
