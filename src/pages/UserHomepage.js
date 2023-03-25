@@ -11,10 +11,13 @@ const UserHomepage = () => {
   setValue(localStorage.getItem("status"));
 },[])
 
-
   let navigate = useNavigate();
   if (!value) {
     return navigate("/");
+  }
+
+  const newEvent = () => {
+    navigate('/EventType')
   }
 
   return (
@@ -40,7 +43,7 @@ const UserHomepage = () => {
           </div>
         </div>
         <div className="text-center">
-          <button className="my-5 rounded-full border-2 px-60 py-5 text-center text-xl">
+          <button className="my-5 rounded-full border-2 px-60 py-5 text-center text-xl" onClick={newEvent}>
             + New Event Type
           </button>
         </div>
