@@ -13,9 +13,10 @@ const UserNavbar = () => {
   const handleClose = () => {
     setOpen(false);
   };
+  
   let navigate = useNavigate()
   const toHome = () => {
-    navigate('/')
+    navigate('/UserHomepage')
   }
 
   const logOut = () => {
