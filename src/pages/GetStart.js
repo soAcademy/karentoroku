@@ -44,7 +44,7 @@ const GetStart = () => {
             <button className="mt-5 w-full rounded-full bg-orange-700 p-5 text-xl text-white">
               Get Started
             </button>
-            <div className="mt-10 text-center">
+            <div className="mt-10 flex mx-auto justify-center">
             <GoogleButton onClick={handleClick} />
             </div>
             <div className="mt-20 flex">
