@@ -1,7 +1,14 @@
 import React from "react";
 import UserNavbar from "../components/navbar/UserNavbar";
+import { useNavigate } from "react-router-dom";
 
 const EventType = () => {
+
+  let navigate = useNavigate()
+  const addEvent = () => {
+    navigate('/EventTypeP2')
+  }
+
   return (
     <>
       <div>
@@ -23,7 +30,7 @@ const EventType = () => {
         <textarea rows="8" className="rounded-xl border-2 border-gray-400" />
       </div>
       <div className=" mt-14 flex flex-col items-center justify-center gap-5 py-5 text-center">
-        <button className="rounded-2xl border-2 bg-orange-700 py-3 px-20 text-lg text-white">
+        <button className="rounded-2xl border-2 bg-orange-700 py-3 px-20 text-lg text-white" onClick={addEvent}>
           Next
         </button>
         <button className="rounded-2xl border-2 py-3 px-20 text-lg">
