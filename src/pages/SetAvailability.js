@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import Navbar from "../components/navbar/Navbar";
+import UserNavbar from "../components/navbar/UserNavbar";
 import SetWorkingHours from "../components/SetWorkingHours";
 import SetCustomHours from "../components/SetCustomHours";
 // import dayjs from "dayjs";
@@ -16,7 +16,7 @@ const SetAvailability = () => {
 
   return (
     <>
-      <Navbar />
+      <UserNavbar />
       <div className="mt-5 w-full">
         <div className="">
           <div className="mx-5 flex flex-col gap-5">
