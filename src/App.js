@@ -16,6 +16,7 @@ import Pricing from "./pages/Pricing";
 import Faq from "./pages/Faq";
 import Aboutus from "./pages/Aboutus";
 import UserHomepage from "./pages/UserHomepage";
+import {ScheduledEvents} from "./components/ScheduledEvents"
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
           <Route path="Faq" element={<Faq />} />
           <Route path="Aboutus" element={<Aboutus />} />
           <Route path="UserHomepage" element={<UserHomepage />} />
+          <Route path="ScheduledEvents" element={<ScheduledEvents />} />
         </Routes>
       </>
     </BrowserRouter>

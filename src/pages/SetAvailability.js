@@ -1,9 +1,10 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import UserNavbar from "../components/navbar/UserNavbar";
 import SetWorkingHours from "../components/SetWorkingHours";
 import SetCustomHours from "../components/SetCustomHours";
+import { useNavigate } from "react-router-dom";
 // import dayjs from "dayjs";
 
 const schedules = [
@@ -13,6 +14,17 @@ const schedules = [
 
 const SetAvailability = () => {
   const [selectedSchedule, setSelectedSchedule] = useState(schedules[0]);
+
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+  setValue(localStorage.getItem("status"));
+},[])
+
+  let navigate = useNavigate();
+  if (!value) {
+    return navigate("/");
+  }
 
   return (
     <>

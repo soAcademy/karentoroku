@@ -39,13 +39,13 @@ const UserNavbar = () => {
               className="w-20 bg-white"
               onClick={toHome}
             />
-            <div className="text-xl font-bold md:hidden" onClick={toHome}>
+            <div className="text-xl hover:font-semibold md:hidden" onClick={toHome}>
               Home
             </div>
           </div>
           <div className="flex md:space-x-5 lg:space-x-8">
             <div className="hidden items-center md:flex md:space-x-5 lg:space-x-8">
-              <div className="text-xl font-semibold cursor-pointer" onClick={toHome}>
+              <div className="text-xl cursor-pointer hover:font-semibold" onClick={toHome}>
                 Home
               </div>
               <Link
@@ -77,9 +77,6 @@ const UserNavbar = () => {
                   Availability
                 </Link>
               </div>
-              <Link to="/adminManagement" className="nav-links">
-                Admin Management
-              </Link>
               <Link to="/mobileNumber" className="nav-links">
                 Mobile Number
               </Link>
