@@ -8,6 +8,11 @@ import { useNavigate } from "react-router-dom";
 //หลังบ้านให้ใช้ findmany where and มี 4 เงื่อนไข job and start time and location
 
 const defaultMeetings = [
+  // name from user
+  // job from user
+  // endDate from Calendar Select
+  // startTime for TimeSelect
+  // name from Location 
   {
     id: 1,
     name: "Durward Reynolds",
