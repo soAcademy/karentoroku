@@ -47,7 +47,11 @@ function App() {
           <Route path="ScheduledEvents" element={<ScheduledEvents />} />
           <Route exact path="/CustomerBooking" element={<CustomerBooking />} />
           <Route exact path="/CustomerDetail" element={<CustomerDetail />} />
-          <Route exact path="/CustomerFinalConfirm" element={<CustomerFinalConfirm />}/>
+          <Route
+            exact
+            path="/CustomerFinalConfirm"
+            element={<CustomerFinalConfirm />}
+          />
         </Routes>
       </>
     </BrowserRouter>
