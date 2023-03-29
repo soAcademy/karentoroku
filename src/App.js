@@ -5,7 +5,7 @@ import GetStart from "./pages/GetStart";
 import Dashboard from "./pages/Dashboard";
 import ErrorPage from "./pages/ErrorPage";
 import SetAvailability from "./pages/SetAvailability";
-import UserPassLogin from "./pages/UserPassLogin"
+import UserPassLogin from "./pages/UserPassLogin";
 import EventType from "./pages/EventType";
 import EventTypeP2 from "./pages/EventTypeP2";
 import EventConfirm from "./pages/EventConfirm";
@@ -16,12 +16,12 @@ import Pricing from "./pages/Pricing";
 import Faq from "./pages/Faq";
 import Aboutus from "./pages/Aboutus";
 import UserHomepage from "./pages/UserHomepage";
-import {ScheduledEvents} from "./components/ScheduledEvents"
+import { ScheduledEvents } from "./components/ScheduledEvents";
+import CustomerBooking from "./pages/CustomerBooking";
+import CustomerDetail from "./pages/CustomerDetail";
+import CustomerFinalConfirm from "./pages/CustomerFinalConfirm";
 
 function App() {
-
-  
-
   return (
     <BrowserRouter>
       <>
@@ -45,6 +45,13 @@ function App() {
           <Route path="Aboutus" element={<Aboutus />} />
           <Route path="UserHomepage" element={<UserHomepage />} />
           <Route path="ScheduledEvents" element={<ScheduledEvents />} />
+          <Route exact path="/CustomerBooking" element={<CustomerBooking />} />
+          <Route exact path="/CustomerDetail" element={<CustomerDetail />} />
+          <Route
+            exact
+            path="/CustomerFinalConfirm"
+            element={<CustomerFinalConfirm />}
+          />
         </Routes>
       </>
     </BrowserRouter>
