@@ -39,7 +39,7 @@ export const ScheduledEvents = () => {
             Event Types
           </div>
           <div
-            className="cursor-pointer duration-300 hover:font-bold"
+            className="cursor-pointer duration-300 font-bold"
             onClick={scheduledEvent}
           >
             Scheduled Events
