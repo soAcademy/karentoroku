@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const UserNavbar = () => {
   const [open, setOpen] = useState(false);
+  const [availability, setAvailability] = useState(false)
 
   const handleOpen = () => {
     setOpen(!open);
@@ -39,18 +40,18 @@ const UserNavbar = () => {
               className="w-20 bg-white"
               onClick={toHome}
             />
-            <div className="text-xl hover:font-semibold md:hidden" onClick={toHome}>
+            <div className="text-xl font-bold md:hidden" onClick={toHome}>
               Home
             </div>
           </div>
           <div className="flex md:space-x-5 lg:space-x-8">
             <div className="hidden items-center md:flex md:space-x-5 lg:space-x-8">
-              <div className="text-xl cursor-pointer hover:font-semibold" onClick={toHome}>
+              <div className="text-xl cursor-pointer font-bold" onClick={toHome}>
                 Home
               </div>
               <Link
                 to="/setAvailability"
-                className="nav-links text-xl text-gray-400"
+                className="nav-links text-xl text-gray-400" onClick={setAvailability}
               >
                 Availability
               </Link>

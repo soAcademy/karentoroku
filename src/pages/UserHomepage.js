@@ -4,12 +4,11 @@ import { BsPerson } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 const UserHomepage = () => {
-  
   const [value, setValue] = useState("");
 
   useEffect(() => {
-  setValue(localStorage.getItem("status"));
-},[])
+    setValue(localStorage.getItem("status"));
+  }, []);
 
   let navigate = useNavigate();
   if (!value) {
@@ -17,15 +16,19 @@ const UserHomepage = () => {
   }
 
   const newEvent = () => {
-    navigate('/EventType')
-  }
+    navigate("/EventType");
+  };
 
   const scheduledEvent = () => {
-    navigate('/ScheduledEvents')
-  }
+    navigate("/ScheduledEvents");
+  };
 
   const toHome = () => {
     navigate("/UserHomepage");
+  };
+
+  const toCustomerBooking = () => {
+    navigate("/CustomerBooking");
   };
 
   return (
@@ -34,10 +37,16 @@ const UserHomepage = () => {
       <div className="mt-5">
         <span className="mx-5 text-2xl">KARENTOROKU</span>
         <div className="border-gray mt-8 flex space-x-5 border-b-[2px] p-2">
-          <div className="ml-3 cursor-pointer duration-300 hover:font-bold" onClick={toHome}>
+          <div
+            className="ml-3 cursor-pointer duration-300 font-bold"
+            onClick={toHome}
+          >
             Event Types
           </div>
-          <div className="cursor-pointer duration-300 hover:font-bold" onClick={scheduledEvent}>
+          <div
+            className="cursor-pointer duration-300 hover:font-bold"
+            onClick={scheduledEvent}
+          >
             Scheduled Events
           </div>
         </div>
@@ -51,14 +60,22 @@ const UserHomepage = () => {
           </div>
         </div>
         <div className="text-center">
-          <button className="my-5 rounded-full border-2 px-60 py-5 text-center text-xl" onClick={newEvent}>
+          <button
+            className="my-5 rounded-full border-2 px-60 py-5 text-center text-xl"
+            onClick={newEvent}
+          >
             + New Event Type
           </button>
         </div>
         <div className="mx-5 mt-5 border-2 border-orange-200 bg-orange-200 pl-5 pt-10">
           <p className="text-2xl">Meeting 30 min</p>
           <p className="mt-2 text-gray-500">30mins, One-on-One</p>
-          <p className="my-10 text-lg text-orange-700">view booking page</p>
+          <p
+            className="my-10 cursor-pointer text-lg text-orange-700"
+            onClick={toCustomerBooking}
+          >
+            view booking page
+          </p>
         </div>
         <div className="mx-5 mt-0.5 flex items-center justify-around border-2 border-orange-200 bg-orange-200 py-2">
           <p className="text-lg">Copy Link</p>
@@ -69,7 +86,12 @@ const UserHomepage = () => {
         <div className="mx-5 mt-5 border-2 border-orange-200 bg-orange-200 pl-5 pt-10">
           <p className="text-2xl">Meeting 30 min</p>
           <p className="mt-2 text-gray-500">30mins, One-on-One</p>
-          <p className="my-10 text-lg text-orange-700">view booking page</p>
+          <p
+            className="my-10 cursor-pointer text-lg text-orange-700"
+            onClick={toCustomerBooking}
+          >
+            view booking page
+          </p>
         </div>
         <div className="mx-5 mt-0.5 flex items-center justify-around border-2 border-orange-200 bg-orange-200 py-2">
           <p className="text-lg">Copy Link</p>
