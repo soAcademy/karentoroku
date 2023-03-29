@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Tab } from "@headlessui/react";
 import { ScheduledEventsCard } from "./ScheduledEventsCard";
 import { Fragment } from "react";
+import UserNavbar from "../components/navbar/UserNavbar";
+import { useNavigate } from "react-router-dom";
 
 export const ScheduledEvents = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);

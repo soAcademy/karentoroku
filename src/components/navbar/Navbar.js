@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../img/logocolor.png";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -11,27 +12,34 @@ const Navbar = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+ let navigate = useNavigate()
+ const home = () => {
+  navigate('/')
+ }
+
   return (
     <>
       <nav className="mx-auto">
         <div className="mx-5 mt-5 flex items-center justify-between">
-          <div className="cursor-pointer">
+          <div className="cursor-pointer" onClick={home}>
             <img src={Logo} alt="Company Logo" className="w-20 bg-white" />
           </div>
           <div className="hidden md:flex md:space-x-5 lg:space-x-8">
             <Link to="/" className="nav-links">
               Home
             </Link>
-            <Link to="/pricing" className="nav-links">
+            {/* Don't forget to correct items */}
+            <Link to="/customerBooking" className="nav-links"> 
               Pricing
             </Link>
-            <Link to="/Dashboard" className="nav-links">
+            <Link to="/dashboard" className="nav-links">
               User Dashboard
             </Link>
             <Link to="/faq" className="nav-links">
               Faq
             </Link>
-            <Link to="/about" className="nav-links">
+            <Link to="/aboutus" className="nav-links">
               About Us
             </Link>
           </div>
@@ -62,7 +70,7 @@ const Navbar = () => {
               <Link to="/" className="nav-links">
                 Home
               </Link>
-              <Link to="/pricing" className="nav-links">
+              <Link to="/Pricing" className="nav-links">
                 Pricing
               </Link>
               <Link to="/Dashboard" className="nav-links">
@@ -71,7 +79,7 @@ const Navbar = () => {
               <Link to="/faq" className="nav-links">
                 Faq
               </Link>
-              <Link to="/about" className="nav-links">
+              <Link to="/aboutus" className="nav-links">
                 About Us
               </Link>
             </div>
