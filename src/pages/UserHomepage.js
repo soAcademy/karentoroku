@@ -20,16 +20,24 @@ const UserHomepage = () => {
     navigate('/EventType')
   }
 
+  const scheduledEvent = () => {
+    navigate('/ScheduledEvents')
+  }
+
+  const toHome = () => {
+    navigate("/UserHomepage");
+  };
+
   return (
     <>
       <UserNavbar />
       <div className="mt-5">
         <span className="mx-5 text-2xl">KARENTOROKU</span>
         <div className="border-gray mt-8 flex space-x-5 border-b-[2px] p-2">
-          <div className="ml-3 cursor-pointer duration-300 hover:font-bold">
+          <div className="ml-3 cursor-pointer duration-300 hover:font-bold" onClick={toHome}>
             Event Types
           </div>
-          <div className="cursor-pointer duration-300 hover:font-bold">
+          <div className="cursor-pointer duration-300 hover:font-bold" onClick={scheduledEvent}>
             Scheduled Events
           </div>
         </div>
