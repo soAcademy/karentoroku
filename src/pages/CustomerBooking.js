@@ -1,23 +1,11 @@
 import React, {useState} from "react";
 import UseCalendar from "../components/calendar/UseCalendar";
-import { GiHamburgerMenu } from "react-icons/gi";
 
 const CustomerBooking = () => {
-
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(!open);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <>
       <div className="w-full">
-        <div onClick={handleOpen} className="cursor-pointer text-5xl py-3">
-          <GiHamburgerMenu />
-        </div>
         <div className="border-2 border-gray-400">
           <div className=" flex flex-col gap-2 items-center justify-center pt-5">
             <h1 className="text-xl text-gray-600 text-xl">Username</h1>

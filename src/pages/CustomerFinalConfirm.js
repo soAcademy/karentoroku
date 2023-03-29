@@ -1,21 +1,11 @@
 import React, { useState } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
 
 const CustomerBooking = () => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(!open);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+
 
   return (
     <>
       <div className="w-full">
-        <div onClick={handleOpen} className="cursor-pointer py-3 text-5xl">
-          <GiHamburgerMenu />
-        </div>
         <div className="border-2 border-gray-400">
           <div className=" flex items-center justify-center pt-5">
             <h1 className="text-3xl">Confirmed</h1>

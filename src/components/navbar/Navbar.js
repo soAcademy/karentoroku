@@ -24,7 +24,7 @@ const Navbar = () => {
               Home
             </Link>
             {/* Don't forget to correct items */}
-            <Link to="/customerTimeConfirm" className="nav-links"> 
+            <Link to="/customerBooking" className="nav-links"> 
               Pricing
             </Link>
             <Link to="/pricing" className="nav-links">

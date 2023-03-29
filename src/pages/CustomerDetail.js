@@ -1,21 +1,16 @@
-import React, { useState } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const CustomerBooking = () => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(!open);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+
+  let navigate = useNavigate()
+  const finalConfirm = () => {
+    navigate('/CustomerFinalConfirm')
+  }
 
   return (
     <>
       <div className="w-full">
-        <div onClick={handleOpen} className="cursor-pointer py-3 text-5xl">
-          <GiHamburgerMenu />
-        </div>
         <div className="border-2 border-gray-400">
           <div className=" flex items-center justify-center pt-5">
             <h1 className="text-4xl">Event Name</h1>
@@ -39,7 +34,7 @@ const CustomerBooking = () => {
           <textarea 
           rows="5"
           />
-           <button className="rounded-lg border-2 border-orange-700 bg-orange-700 py-3 px-60 text-xl text-white">
+           <button className="rounded-lg border-2 border-orange-700 bg-orange-700 py-3 px-60 text-xl text-white" onClick={finalConfirm}>
             Schedule Event
           </button>
         </div>
