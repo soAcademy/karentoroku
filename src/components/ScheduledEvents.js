@@ -20,13 +20,13 @@ export const ScheduledEvents = () => {
               </button>
             )}
           </Tab>
-          <Tab className="px-6 hover:font-bold hover:text-black" as={Fragment}>
+          {/* <Tab className="px-6 hover:font-bold hover:text-black" as={Fragment}>
             {({ selected }) => (
               <button className={selected ? "font-bold text-black" : ""}>
                 Pending
               </button>
             )}
-          </Tab>
+          </Tab> */}
           <Tab className="px-6 hover:font-bold hover:text-black" as={Fragment}>
             {({ selected }) => (
               <button className={selected ? "font-bold text-black" : ""}>
@@ -35,22 +35,21 @@ export const ScheduledEvents = () => {
             )}
           </Tab>
 
-          <Tab className="px-6 hover:font-bold hover:text-black" as={Fragment}>
+          {/* <Tab className="px-6 hover:font-bold hover:text-black" as={Fragment}>
             {({ selected }) => (
               <button className={selected ? "font-bold text-black" : ""}>
                 Date Range
               </button>
             )}
-          </Tab>
+          </Tab> */}
         </Tab.List>
         <Tab.Panels>
           <Tab.Panel>
-            Content 1
             <ScheduledEventsCard />
           </Tab.Panel>
           <Tab.Panel>Content 2</Tab.Panel>
-          <Tab.Panel>Content 3</Tab.Panel>
-          <Tab.Panel>Content 4</Tab.Panel>
+          {/* <Tab.Panel>Content 3</Tab.Panel>
+          <Tab.Panel>Content 4</Tab.Panel> */}
         </Tab.Panels>
       </Tab.Group>
     </div>

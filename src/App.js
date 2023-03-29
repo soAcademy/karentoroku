@@ -5,6 +5,7 @@ import GetStart from "./pages/GetStart";
 import Dashboard from "./pages/Dashboard";
 import ErrorPage from "./pages/ErrorPage";
 import SetAvailability from "./pages/SetAvailability";
+import {ScheduledEvents} from "./components/ScheduledEvents"
 
 function App() {
   return (
