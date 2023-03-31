@@ -5,9 +5,23 @@ import { PlusCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone"; // dependent on utc plugin
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import duration from "dayjs/plugin/duration";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
+dayjs.extend(customParseFormat);
+dayjs.extend(duration);
+
+console.log(dayjs("09:00", "hh:mm"));
+console.log(dayjs.duration({ hours: 2 }));
+console.log(new Date("2023-03-30"));
+console.log(
+  dayjs("2023-03-30")
+    .add(dayjs.duration({ hours: 2 }))
+    .toDate()
+);
+console.log(dayjs.duration(7200000).as("hours").toDate());
 
 const defaultStartTime = "09:00";
 const defaultEndTime = "12:00";
@@ -100,6 +114,38 @@ const SetWorkingHours = () => {
     );
     setWeeklyHours(_weeklyHours);
   };
+
+  const areAnyHoursOverlapped = (hours) => {
+    const sortedHours = hours.sort((a, b) =>
+      a.startTime.localeCompare(b.startTime)
+    );
+
+    // console.log(sortedHours);
+
+    for (let i = 0; i < sortedHours.length - 1; i++) {
+      // console.log(
+      //   `compare ${sortedHours[i].endTime} with ${sortedHours[i + 1].startTime}`
+      // );
+      // console.log(
+      //   `result: ${sortedHours[i].endTime.localeCompare(
+      //     sortedHours[i + 1].startTime
+      //   )}`
+      // );
+      if (
+        sortedHours[i].endTime.localeCompare(sortedHours[i + 1].startTime) >= 0
+      )
+        return true;
+    }
+
+    return false;
+  };
+
+  console.log(
+    areAnyHoursOverlapped([
+      { startTime: "17:00", endTime: "18:00" },
+      { startTime: "18:00", endTime: "21:00" },
+    ])
+  );
 
   return (
     <>
