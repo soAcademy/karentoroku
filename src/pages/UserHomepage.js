@@ -2,9 +2,59 @@ import React, { useState, useEffect } from "react";
 import UserNavbar from "../components/navbar/UserNavbar";
 import { BsPerson } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import axios from "axios";
+import { auth } from "../components/auth/config";
 
 const UserHomepage = () => {
   const [value, setValue] = useState("");
+
+  useEffect(() => {
+    setValue(localStorage.getItem("status"));
+  }, []);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // https://www.freecodecamp.org/news/use-firebase-authentication-in-a-react-app/
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const uid = user.uid;
+        // ...
+        // console.log(user);
+        // console.log("uid", uid);
+        auth.currentUser
+          .getIdToken(/* forceRefresh */ true)
+          .then(function (idToken) {
+            // Send token to your backend via HTTPS
+            // ...
+            // console.log(idToken);
+            axios
+              .post("http://localhost:8000/createUser", {
+                idToken: idToken,
+                name: "korayut001",
+                username: "abc123001"
+              })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          })
+          .catch(function (error) {
+            // Handle error
+            console.log(error);
+          });
+      } else {
+        // User is signed out
+        // ...
+        console.log("user is logged out");
+      }
+    });
+  }, []);
+
+  //Test
 
   useEffect(() => {
     setValue(localStorage.getItem("status"));
