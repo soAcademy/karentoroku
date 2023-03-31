@@ -5,26 +5,37 @@ import { PlusCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone"; // dependent on utc plugin
-import customParseFormat from "dayjs/plugin/customParseFormat";
-import duration from "dayjs/plugin/duration";
+// import customParseFormat from "dayjs/plugin/customParseFormat";
+// import duration from "dayjs/plugin/duration";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
-dayjs.extend(customParseFormat);
-dayjs.extend(duration);
+// dayjs.extend(customParseFormat);
+// dayjs.extend(duration);
 
-console.log(dayjs("09:00", "hh:mm"));
-console.log(dayjs.duration({ hours: 2 }));
-console.log(new Date("2023-03-30"));
-console.log(
-  dayjs("2023-03-30")
-    .add(dayjs.duration({ hours: 2 }))
-    .toDate()
-);
-console.log(dayjs.duration(7200000).as("hours").toDate());
+// console.log(dayjs("09:00", "hh:mm"));
+// console.log(dayjs.duration({ hours: 2 }));
+// console.log(new Date("2023-03-30"));
+// console.log(
+//   dayjs("2023-03-30")
+//     .add(dayjs.duration({ hours: 2 }))
+//     .toDate()
+// );
+// console.log(dayjs.duration(7200000).as("hours").toDate());
 
-const defaultStartTime = "09:00";
-const defaultEndTime = "12:00";
+const timeStringToTimeInt = (timeString) => {
+  const timeArray = timeString.split(":");
+  return Number(timeArray[0]) * 60 + Number(timeArray[1]);
+};
+
+const timeIntToTimeString = (timeInt) => {
+  return `${Math.floor(timeInt / 60).toLocaleString("en", {
+    minimumIntegerDigits: 2,
+  })}:${(timeInt % 60).toLocaleString("en", { minimumIntegerDigits: 2 })}`;
+};
+
+const defaultStartTime = timeStringToTimeInt("09:00");
+const defaultEndTime = timeStringToTimeInt("12:00");
 
 const timeZones = Intl.supportedValuesOf("timeZone").map(
   (timeZoneValue, idx) => ({ id: idx + 1, name: timeZoneValue })
@@ -49,24 +60,45 @@ const initialWeeklyHours = [
   {
     day: 1,
     enabled: true,
-    hours: [{ startTime: "17:00", endTime: "18:00" }],
+    hours: [
+      {
+        startTime: timeStringToTimeInt("17:00"),
+        endTime: timeStringToTimeInt("18:00"),
+      },
+    ],
   },
   {
     day: 2,
     enabled: true,
-    hours: [{ startTime: "17:00", endTime: "18:00" }],
+    hours: [
+      {
+        startTime: timeStringToTimeInt("17:00"),
+        endTime: timeStringToTimeInt("18:00"),
+      },
+    ],
   },
   {
     day: 3,
     enabled: true,
-    hours: [{ startTime: "17:00", endTime: "18:00" }],
+    hours: [
+      {
+        startTime: timeStringToTimeInt("17:00"),
+        endTime: timeStringToTimeInt("18:00"),
+      },
+    ],
   },
   {
     day: 4,
     enabled: true,
     hours: [
-      { startTime: "17:00", endTime: "18:00" },
-      { startTime: "19:00", endTime: "21:00" },
+      {
+        startTime: timeStringToTimeInt("17:00"),
+        endTime: timeStringToTimeInt("18:00"),
+      },
+      {
+        startTime: timeStringToTimeInt("19:00"),
+        endTime: timeStringToTimeInt("21:00"),
+      },
     ],
   },
   { day: 5, enabled: false, hours: [] },
@@ -94,7 +126,7 @@ const SetWorkingHours = () => {
         startTime: defaultStartTime,
         endTime: defaultEndTime,
       },
-    ].sort((a, b) => a.startTime.localeCompare(b.startTime));
+    ].sort((a, b) => a - b);
     setWeeklyHours(_weeklyHours);
   };
 
@@ -102,8 +134,10 @@ const SetWorkingHours = () => {
     e.preventDefault();
     const _weeklyHours = [...weeklyHours];
     isStartTime
-      ? (_weeklyHours[weekdayIdx].hours[periodIdx].startTime = e.target.value)
-      : (_weeklyHours[weekdayIdx].hours[periodIdx].endTime = e.target.value);
+      ? (_weeklyHours[weekdayIdx].hours[periodIdx].startTime =
+          timeStringToTimeInt(e.target.value))
+      : (_weeklyHours[weekdayIdx].hours[periodIdx].endTime =
+          timeStringToTimeInt(e.target.value));
     setWeeklyHours(_weeklyHours);
   };
 
@@ -116,8 +150,10 @@ const SetWorkingHours = () => {
   };
 
   const areAnyHoursOverlapped = (hours) => {
-    const sortedHours = hours.sort((a, b) =>
-      a.startTime.localeCompare(b.startTime)
+    const sortedHours = hours.sort(
+      (a, b) =>
+        // a.startTime.localeCompare(b.startTime) // timeString sorting
+        a - b // timeInt sorting
     );
 
     // console.log(sortedHours);
@@ -132,7 +168,9 @@ const SetWorkingHours = () => {
       //   )}`
       // );
       if (
-        sortedHours[i].endTime.localeCompare(sortedHours[i + 1].startTime) >= 0
+        // sortedHours[i].endTime.localeCompare(sortedHours[i + 1].startTime) >= 0
+        // timeString comparison
+        sortedHours[i].endTime >= sortedHours[i + 1].startTime // timeInt comparison
       )
         return true;
     }
@@ -142,8 +180,14 @@ const SetWorkingHours = () => {
 
   console.log(
     areAnyHoursOverlapped([
-      { startTime: "17:00", endTime: "18:00" },
-      { startTime: "18:00", endTime: "21:00" },
+      {
+        startTime: timeStringToTimeInt("17:00"),
+        endTime: timeStringToTimeInt("18:00"),
+      },
+      {
+        startTime: timeStringToTimeInt("19:00"),
+        endTime: timeStringToTimeInt("21:00"),
+      },
     ])
   );
 
@@ -244,7 +288,7 @@ const SetWorkingHours = () => {
                   >
                     <input
                       type="time"
-                      value={period.startTime}
+                      value={timeIntToTimeString(period.startTime)}
                       onChange={(e) =>
                         handleTimeChange(e, weekdayIdx, periodIdx, true)
                       }
@@ -252,7 +296,7 @@ const SetWorkingHours = () => {
                     -{" "}
                     <input
                       type="time"
-                      value={period.endTime}
+                      value={timeIntToTimeString(period.endTime)}
                       onChange={(e) =>
                         handleTimeChange(e, weekdayIdx, periodIdx, false)
                       }
