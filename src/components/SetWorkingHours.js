@@ -108,6 +108,7 @@ const initialWeeklyHours = [
 const SetWorkingHours = () => {
   const [selectedTimeZone, setSelectedTimeZone] = useState(guessedTimeZone);
   const [weeklyHours, setWeeklyHours] = useState(initialWeeklyHours);
+  // const [isWeeklyHoursValid, setIsWeeklyHoursValid] = useState(true);
 
   const handleWeekdaySwitchClick = (weekdayIdx) => {
     const _weeklyHours = [...weeklyHours];
@@ -126,7 +127,7 @@ const SetWorkingHours = () => {
         startTime: defaultStartTime,
         endTime: defaultEndTime,
       },
-    ].sort((a, b) => a - b);
+    ];
     setWeeklyHours(_weeklyHours);
   };
 
@@ -139,6 +140,8 @@ const SetWorkingHours = () => {
       : (_weeklyHours[weekdayIdx].hours[periodIdx].endTime =
           timeStringToTimeInt(e.target.value));
     setWeeklyHours(_weeklyHours);
+    // areAnyHoursOverlapped(weeklyHours[weekdayIdx].hours) ??
+    //   console.log(`Overlapping hours on ${weekdays[weekdayIdx]}`);
   };
 
   const handleTrashClick = (weekdayIdx, periodIdx) => {
@@ -153,7 +156,7 @@ const SetWorkingHours = () => {
     const sortedHours = hours.sort(
       (a, b) =>
         // a.startTime.localeCompare(b.startTime) // timeString sorting
-        a - b // timeInt sorting
+        a.startTime - b.startTime // timeInt sorting
     );
 
     // console.log(sortedHours);
@@ -178,18 +181,34 @@ const SetWorkingHours = () => {
     return false;
   };
 
-  console.log(
-    areAnyHoursOverlapped([
-      {
-        startTime: timeStringToTimeInt("17:00"),
-        endTime: timeStringToTimeInt("18:00"),
-      },
-      {
-        startTime: timeStringToTimeInt("19:00"),
-        endTime: timeStringToTimeInt("21:00"),
-      },
-    ])
-  );
+  const isHourInvalid = (hour) => hour.startTime >= hour.endTime;
+
+  // console.log(
+  //   areAnyHoursOverlapped([
+  //     {
+  //       startTime: timeStringToTimeInt("17:00"),
+  //       endTime: timeStringToTimeInt("18:00"),
+  //     },
+  //     {
+  //       startTime: timeStringToTimeInt("19:00"),
+  //       endTime: timeStringToTimeInt("21:00"),
+  //     },
+  //   ])
+  // );
+
+  const isWeeklyHoursInvalid = (weeklyHours) => {
+    return weeklyHours
+      .filter((day) => day.enabled === true)
+      .reduce((isInvalid, currentDay) => {
+        return (
+          isInvalid ||
+          areAnyHoursOverlapped(currentDay.hours) ||
+          currentDay.hours.reduce((isInvalid, currentHour) => {
+            return isInvalid || isHourInvalid(currentHour);
+          }, false)
+        );
+      }, false);
+  };
 
   return (
     <>
@@ -252,10 +271,20 @@ const SetWorkingHours = () => {
         </div>
       </Listbox>
       <h4 className="text-base font-bold uppercase">Set your weekly hour</h4>
+      <div>{isWeeklyHoursInvalid(weeklyHours)}</div>
+      {isWeeklyHoursInvalid(weeklyHours) && (
+        <div
+          className="mb-4 rounded-lg bg-red-50 p-4 text-sm text-red-800 dark:bg-gray-800 dark:text-red-400"
+          role="alert"
+        >
+          <span className="font-medium">Error!</span> The availability schedule
+          is invalid.
+        </div>
+      )}
       <ul className="flex flex-col gap-2">
         {weekdays.map((weekday, weekdayIdx) => (
           <Fragment key={weekdayIdx}>
-            <li className="flex flex-row items-center justify-between gap-2">
+            <li className="flex flex-row items-center justify-between gap-2 py-2">
               <Switch
                 checked={weeklyHours[weekdayIdx].enabled}
                 onChange={() => handleWeekdaySwitchClick(weekdayIdx)}
