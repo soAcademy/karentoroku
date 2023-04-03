@@ -21,9 +21,9 @@ const SetAvailability = () => {
     setValue(localStorage.getItem("status"));
   }, []);
 
-  const { user } = useAuth();
+  const { user, idToken } = useAuth();
 
-  console.log(user);
+  console.log(`ID token for current user with ID ${user.uid} is ${idToken}`);
 
   let navigate = useNavigate();
   if (!value) {
