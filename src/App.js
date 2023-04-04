@@ -17,6 +17,7 @@ import Pricing from "./pages/Pricing";
 import Faq from "./pages/Faq";
 import Aboutus from "./pages/Aboutus";
 import UserHomepage from "./pages/UserHomepage";
+import NewUser from "./pages/NewUser";
 import CustomerBooking from "./pages/CustomerBooking";
 import CustomerDetail from "./pages/CustomerDetail";
 import CustomerFinalConfirm from "./pages/CustomerFinalConfirm";
@@ -45,6 +46,7 @@ function App() {
           <Route path="/Faq" element={<Faq />} />
           <Route path="/Aboutus" element={<Aboutus />} />
           <Route path="/UserHomepage" element={<UserHomepage />} />
+          <Route path="/NewUser" element={<NewUser />} />
           <Route path="/ScheduledEvents" element={<ScheduledEvents />} />
           <Route exact path="/CustomerBooking" element={<CustomerBooking />} />
           <Route exact path="/CustomerDetail" element={<CustomerDetail />} />

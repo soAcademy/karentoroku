@@ -3,7 +3,7 @@ import UserNavbar from "../components/navbar/UserNavbar";
 import { BsPerson } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 // import { onAuthStateChanged } from "firebase/auth";
-import axios from "axios";
+// import axios from "axios";
 // import { auth } from "../components/auth/config";
 import { useAuth } from "../hooks/useAuth";
 
@@ -16,10 +16,10 @@ const UserHomepage = () => {
 
   const { user, idToken } = useAuth();
 
-  // console.log(idToken);
+  console.log(`idToken: ${idToken}`);
   if (user !== undefined) {
     // console.log(`ID token for current user with ID ${user.uid} is ${idToken}`);
-    console.log(user);
+    console.log(`user: ${user}`);
   }
 
   // useEffect(() => {

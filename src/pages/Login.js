@@ -6,9 +6,11 @@ import { auth, provider } from "../components/auth/config";
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import axios from "axios";
 
 const Login = () => {
   const [currentUser, setCurrentUser] = useState();
+  const [existingUser, setExistingUser] = useState();
 
   const { user, idToken } = useAuth();
 
@@ -17,7 +19,7 @@ const Login = () => {
       signInWithPopup(auth, provider).then((data) => {
         setCurrentUser(data.user.email);
         localStorage.setItem("email", data.user.email);
-        console.log(idToken);
+        // console.log(idToken);
       });
     } catch (error) {
       alert(error);
@@ -26,10 +28,26 @@ const Login = () => {
 
   let navigate = useNavigate();
   useEffect(() => {
-    if (currentUser) {
-      return navigate("/UserHomepage");
-    }
-  }, [currentUser]);
+    axios
+      .post("http://localhost:8000/getUserByIdToken", { idToken: idToken })
+      .then((response) => {
+        console.log(response);
+        if (response.data.username !== undefined) {
+          setExistingUser(response.data.username);
+          navigate("/UserHomepage");
+        } else {
+          navigate("/NewUser");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // if (existingUser) {
+    //   navigate("/UserHomepage");
+    // } else {
+    //   navigate("/NewUser");
+    // }
+  }, [existingUser, idToken]);
 
   return (
     <>
@@ -49,7 +67,7 @@ const Login = () => {
         </div>
       </div>
       <div className="m-auto mt-20 rounded-xl bg-gray-100 p-4 sm:w-4/5 md:w-3/4 lg:w-1/2 2xl:w-2/6">
-        <label className="mt-3">Enter your email to get started</label>
+        {/* <label className="mt-3">Enter your email to get started</label>
         <input
           type="email"
           name="email"
@@ -58,16 +76,16 @@ const Login = () => {
         />
         <button className="mt-5 w-full rounded-full bg-orange-700 p-5 text-xl text-white">
           Continue
-        </button>
+        </button> */}
         <div className="mt-10 flex items-center justify-center">
           <GoogleButton onClick={handleClick} />
         </div>
-        <div className="mt-20 flex">
+        {/* <div className="mt-20 flex">
           <div>Don't have an account?</div>
           <Link to="/GetStart" className="ml-2 text-blue-600">
             Sign up
           </Link>
-        </div>
+        </div> */}
       </div>
     </>
   );
