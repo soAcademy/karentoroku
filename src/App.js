@@ -38,13 +38,13 @@ function App() {
           <Route exact path="/EventTypeP2" element={<EventTypeP2 />} />
           <Route exact path="/EventConfirm" element={<EventConfirm />} />
           <Route path="/UserProfile" element={<UserProfile />} />
-          <Route path="UserGroupSetting" element={<UserGroupSetting />} />
-          <Route path="UserGroupConfirm" element={<UserGroupConfirm />} />
-          <Route path="Pricing" element={<Pricing />} />
-          <Route path="Faq" element={<Faq />} />
-          <Route path="Aboutus" element={<Aboutus />} />
-          <Route path="UserHomepage" element={<UserHomepage />} />
-          <Route path="ScheduledEvents" element={<ScheduledEvents />} />
+          <Route path="/UserGroupSetting" element={<UserGroupSetting />} />
+          <Route path="/UserGroupConfirm" element={<UserGroupConfirm />} />
+          <Route path="/Pricing" element={<Pricing />} />
+          <Route path="/Faq" element={<Faq />} />
+          <Route path="/Aboutus" element={<Aboutus />} />
+          <Route path="/UserHomepage" element={<UserHomepage />} />
+          <Route path="/ScheduledEvents" element={<ScheduledEvents />} />
           <Route exact path="/CustomerBooking" element={<CustomerBooking />} />
           <Route exact path="/CustomerDetail" element={<CustomerDetail />} />
           <Route
