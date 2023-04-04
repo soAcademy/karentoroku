@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-export const ScheduledEventsCard = () => {
+export const PastEventsCard = () => {
   // customerId in EventSelect
   // selectCalendar from EventSelect
   // selectTime from EventSelect
@@ -20,7 +20,7 @@ export const ScheduledEventsCard = () => {
   const meetings = [
     {
       CustomerName: "A",
-      date: "2023-04-06",
+      date: "2023-03-26",
       timeStart: timeStringToTimeInt("08:00"),
       duration: 30,
       MeetingName: " Meeting A",
@@ -28,7 +28,7 @@ export const ScheduledEventsCard = () => {
     },
     {
       CustomerName: "B",
-      date: "2023-04-07",
+      date: "2023-03-28",
       timeStart: timeStringToTimeInt("09:00"),
       duration: 30,
       MeetingName: " Meeting B",
@@ -36,7 +36,7 @@ export const ScheduledEventsCard = () => {
     },
     {
       CustomerName: "C",
-      date: "2023-04-10",
+      date: "2023-04-01",
       timeStart: timeStringToTimeInt("08:00"),
       duration: 30,
       MeetingName: " Meeting C",
