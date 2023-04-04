@@ -8,10 +8,11 @@ const EventTypeP2 = () => {
   const [duration, setDuration] = useState(30);
   const [days, setDays] = useState(60);
   const [price, setPrice] = useState(500);
+  const [timeSlots, setTimeSlots] = useState([]);
 
   const arrayOfDate = [];
   const _data = JSON.parse(localStorage.getItem("EventData"));
-  console.log("Event P1:", _data.eventName);
+  console.log("Event P1:", _data.EventName);
 
   const submitData = async (e) => {
     e.preventDefault();
@@ -24,24 +25,28 @@ const EventTypeP2 = () => {
     console.log("New Data:", newData);
     localStorage.setItem("EventData", JSON.stringify(newData));
 
-    const days = [{ dayName: "Saturday" }, { dayName: "Sunday" }];
+    const days = timeSlots.map((timeSlot) => ({ dayName: timeSlot.day }));
 
-    const TimeSlots = [
-      {
-        day: "Saturday",
-        timeSlot: [
-          { startTime: 540, endTime: 600 },
-          { startTime: 600, endTime: 660 },
-        ],
-      },
-      {
-        day: "Sunday",
-        timeSlot: [
-          { startTime: 100, endTime: 200 },
-          { startTime: 200, endTime: 300 },
-        ],
-      },
-    ];
+    // const days = [{ dayName: "Saturday" }, { dayName: "Sunday" }];
+
+    // const TimeSlots = [
+    //   {
+    //     day: "Saturday",
+    //     timeSlot: [
+    //       { startTime: 540, endTime: 600 },
+    //       { startTime: 600, endTime: 660 },
+    //     ],
+    //   },
+    //   {
+    //     day: "Sunday",
+    //     timeSlot: [
+    //       { startTime: 100, endTime: 200 },
+    //       { startTime: 200, endTime: 300 },
+    //     ],
+    //   },
+    // ];
+
+    // setTimeSlots(TimeSlots);
 
     const locationData = [
       {
@@ -98,12 +103,13 @@ const EventTypeP2 = () => {
         .filter((r) => d.dayName === r.day)
         .map((b) => b.date)
         .flat();
-      const findTime = TimeSlots.filter((a) => d.dayName === a.day)
+      const findTime = timeSlots
+        .filter((a) => d.dayName === a.day)
         .map((c) => c.timeSlot)
         .flat();
       return {
-        name: newData.eventName,
-        description: newData.description,
+        name: newData.EventName,
+        description: newData.Description,
         price: Number(newData.price),
         timeDuration: Number(newData.duration),
         userId: 1,
@@ -215,7 +221,10 @@ const EventTypeP2 = () => {
             Set custom hours
           </button>
           <div className="mx-4 mt-2">
-          <SetWorkingHours_Events />
+            <SetWorkingHours_Events
+              timeSlots={timeSlots}
+              setTimeSlots={setTimeSlots}
+            />
           </div>
           <div className=" mt-14 flex flex-col items-center justify-center gap-5 py-5 text-center">
             <button
