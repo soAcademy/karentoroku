@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import UserNavbar from "../components/navbar/UserNavbar";
 import { BsPerson } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
+// import { onAuthStateChanged } from "firebase/auth";
 import axios from "axios";
-import { auth } from "../components/auth/config";
+// import { auth } from "../components/auth/config";
+import { useAuth } from "../hooks/useAuth";
 
 const UserHomepage = () => {
   const [value, setValue] = useState("");
@@ -13,46 +14,54 @@ const UserHomepage = () => {
     setValue(localStorage.getItem("status"));
   }, []);
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // https://www.freecodecamp.org/news/use-firebase-authentication-in-a-react-app/
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
-        const uid = user.uid;
-        // ...
-        // console.log(user);
-        // console.log("uid", uid);
-        auth.currentUser
-          .getIdToken(/* forceRefresh */ true)
-          .then(function (idToken) {
-            // Send token to your backend via HTTPS
-            // ...
-            // console.log(idToken);
-            axios
-              .post("http://localhost:8000/createUser", {
-                idToken: idToken,
-                name: "korayut001",
-                username: "abc123001"
-              })
-              .then(function (response) {
-                console.log(response);
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-          })
-          .catch(function (error) {
-            // Handle error
-            console.log(error);
-          });
-      } else {
-        // User is signed out
-        // ...
-        console.log("user is logged out");
-      }
-    });
-  }, []);
+  const { user, idToken } = useAuth();
+
+  // console.log(idToken);
+  if (user !== undefined) {
+    // console.log(`ID token for current user with ID ${user.uid} is ${idToken}`);
+    console.log(user);
+  }
+
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       // https://www.freecodecamp.org/news/use-firebase-authentication-in-a-react-app/
+  //       // User is signed in, see docs for a list of available properties
+  //       // https://firebase.google.com/docs/reference/js/auth.user
+  //       const uid = user.uid;
+  //       // ...
+  //       // console.log(user);
+  //       // console.log("uid", uid);
+  //       auth.currentUser
+  //         .getIdToken(/* forceRefresh */ true)
+  //         .then(function (idToken) {
+  //           // Send token to your backend via HTTPS
+  //           // ...
+  //           // console.log(idToken);
+  //           axios
+  //             .post("http://localhost:8000/createUser", {
+  //               idToken: idToken,
+  //               name: "korayut001",
+  //               username: "abc123001"
+  //             })
+  //             .then(function (response) {
+  //               console.log(response);
+  //             })
+  //             .catch(function (error) {
+  //               console.log(error);
+  //             });
+  //         })
+  //         .catch(function (error) {
+  //           // Handle error
+  //           console.log(error);
+  //         });
+  //     } else {
+  //       // User is signed out
+  //       // ...
+  //       console.log("user is logged out");
+  //     }
+  //   });
+  // }, []);
 
   //Test
 
@@ -88,7 +97,7 @@ const UserHomepage = () => {
         <span className="mx-5 text-2xl">KARENTOROKU</span>
         <div className="border-gray mt-8 flex space-x-5 border-b-[2px] p-2">
           <div
-            className="ml-3 cursor-pointer duration-300 font-bold"
+            className="ml-3 cursor-pointer font-bold duration-300"
             onClick={toHome}
           >
             Event Types
@@ -105,7 +114,7 @@ const UserHomepage = () => {
             <BsPerson />
           </div>
           <div>
-            <p className="text-xl">username</p>
+            <p className="text-xl">{user.displayName}</p>
             <p className="text-xl text-orange-700">karentoroku.com/username</p>
           </div>
         </div>
