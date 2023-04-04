@@ -6,10 +6,14 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { auth } from "../components/auth/config";
 import { useAuth } from "../hooks/useAuth";
+import { Tab } from "@headlessui/react";
+import { Fragment } from "react";
+import { ScheduledEvents } from "../components/ScheduledEvents";
 
 const UserHomepage = () => {
   const [value, setValue] = useState("");
   const [currentUser, setCurrentUser] = useState({});
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
     setValue(localStorage.getItem("status"));
@@ -115,7 +119,94 @@ const UserHomepage = () => {
       <UserNavbar />
       <div className="mt-5">
         <span className="mx-5 text-2xl">KARENTOROKU</span>
-        <div className="border-gray mt-8 flex space-x-5 border-b-[2px] p-2">
+        <Tab.Group
+          defaultIndex={1}
+          selectedIndex={selectedIndex}
+          onChange={setSelectedIndex}
+        >
+          <Tab.List className="border-gray mt-8 flex space-x-5 border-b-[2px] p-2">
+            <Tab
+              className="ml-3 cursor-pointer duration-300 hover:font-bold"
+              as={Fragment}
+            >
+              {({ selected }) => (
+                <button className={selected ? "font-bold text-black" : ""}>
+                  Event Types
+                </button>
+              )}
+            </Tab>
+            <Tab
+              className="ml-3 cursor-pointer duration-300 hover:font-bold"
+              as={Fragment}
+            >
+              {({ selected }) => (
+                <button className={selected ? "font-bold text-black" : ""}>
+                  Scheduled Events
+                </button>
+              )}
+            </Tab>
+          </Tab.List>
+          <div className="border-gray flex items-center space-x-16 border-b-[2px]">
+            <div className="my-6 ml-5 text-6xl">
+              <BsPerson />
+            </div>
+            <div>
+              <p className="text-xl">{currentUser.name}</p>
+              <p className="text-xl text-orange-700">
+                karentoroku.com/{currentUser.username}
+              </p>
+            </div>
+          </div>
+          <Tab.Panels>
+            <Tab.Panel>
+              {" "}
+              <div className="text-center">
+                <button
+                  className="my-5 rounded-full border-2 px-60 py-5 text-center text-xl"
+                  onClick={newEvent}
+                >
+                  + New Event Type
+                </button>
+              </div>
+              <div className="mx-5 mt-5 border-2 border-orange-200 bg-orange-200 pl-5 pt-10">
+                <p className="text-2xl">Meeting 30 min</p>
+                <p className="mt-2 text-gray-500">30mins, One-on-One</p>
+                <p
+                  className="my-10 cursor-pointer text-lg text-orange-700"
+                  onClick={toCustomerBooking}
+                >
+                  view booking page
+                </p>
+              </div>
+              <div className="mx-5 mt-0.5 flex items-center justify-around border-2 border-orange-200 bg-orange-200 py-2">
+                <p className="text-lg">Copy Link</p>
+                <button className="rounded-full border-2 border-orange-700 bg-white px-10 py-3 text-lg">
+                  Share
+                </button>
+              </div>
+              <div className="mx-5 mt-5 border-2 border-orange-200 bg-orange-200 pl-5 pt-10">
+                <p className="text-2xl">Meeting 30 min</p>
+                <p className="mt-2 text-gray-500">30mins, One-on-One</p>
+                <p
+                  className="my-10 cursor-pointer text-lg text-orange-700"
+                  onClick={toCustomerBooking}
+                >
+                  view booking page
+                </p>
+              </div>
+              <div className="mx-5 mt-0.5 flex items-center justify-around border-2 border-orange-200 bg-orange-200 py-2">
+                <p className="text-lg">Copy Link</p>
+                <button className="rounded-full border-2 border-orange-700 bg-white px-10 py-3 text-lg">
+                  Share
+                </button>
+              </div>
+            </Tab.Panel>
+            <Tab.Panel>
+              <ScheduledEvents />
+            </Tab.Panel>
+          </Tab.Panels>
+        </Tab.Group>
+        {/* <div className="border-gray mt-8 flex space-x-5 border-b-[2px] p-2">
           <div
             className="ml-3 cursor-pointer font-bold duration-300"
             onClick={toHome}
@@ -179,7 +270,7 @@ const UserHomepage = () => {
           <button className="rounded-full border-2 border-orange-700 bg-white px-10 py-3 text-lg">
             Share
           </button>
-        </div>
+        </div> */}
       </div>
     </>
   );
