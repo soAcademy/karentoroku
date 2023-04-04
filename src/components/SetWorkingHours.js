@@ -106,7 +106,6 @@ const initialWeeklyHours = [
 ];
 
 const SetWorkingHours = () => {
-  
   const [selectedTimeZone, setSelectedTimeZone] = useState(guessedTimeZone);
   const [weeklyHours, setWeeklyHours] = useState(initialWeeklyHours);
   // const [isWeeklyHoursValid, setIsWeeklyHoursValid] = useState(true);
@@ -119,7 +118,6 @@ const SetWorkingHours = () => {
     });
     setWeeklyHours(_weeklyHours);
   };
-  
 
   const handlePlusClick = (weekdayIdx) => {
     const _weeklyHours = [...weeklyHours];
@@ -154,7 +152,7 @@ const SetWorkingHours = () => {
     setWeeklyHours(_weeklyHours);
   };
 
-  console.log("weekly Hours:",weeklyHours);
+  console.log("weekly Hours:", weeklyHours);
 
   const areAnyHoursOverlapped = (hours) => {
     const sortedHours = hours.sort(

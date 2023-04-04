@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Logo from "../img/logocolor.png";
 import { BsPerson } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../auth/config";
 
 const UserNavbar = () => {
   const [open, setOpen] = useState(false);
@@ -20,8 +22,9 @@ const UserNavbar = () => {
     navigate("/UserHomepage");
   };
 
-  const logOut = () => {
+  const logOut = async () => {
     try {
+      await signOut(auth);
       localStorage.clear();
       window.location.reload();
     } catch (error) {
