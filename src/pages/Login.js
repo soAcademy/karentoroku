@@ -29,7 +29,9 @@ const Login = () => {
   let navigate = useNavigate();
   useEffect(() => {
     axios
-      .post("http://localhost:8000/getUserByIdToken", { idToken: idToken })
+      .post(`${process.env.REACT_APP_API_URL}/getUserByIdToken`, {
+        idToken: idToken,
+      })
       .then((response) => {
         console.log(response);
         if (response.data.username !== undefined) {

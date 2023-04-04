@@ -35,7 +35,7 @@ const Login = () => {
     e.preventDefault();
     // console.log(e.target[0].value);
     axios
-      .post("http://localhost:8000/createUser", {
+      .post(`${process.env.REACT_APP_API_URL}/createUser`, {
         idToken: idToken,
         name: user.displayName,
         username: e.target[0].value,
