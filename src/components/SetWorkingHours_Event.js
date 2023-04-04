@@ -99,6 +99,15 @@ const timeSlotsToWeeklyHours = (timeSlots) => {
   });
 };
 
+const weeklyHoursToTimeSlots = (weeklyHours) => {
+  return weeklyHours
+    .filter((day) => day.enabled === true)
+    .map((day) => ({
+      day: weekdays[day.day],
+      timeSlot: day.hours,
+    }));
+};
+
 // console.log("weekly hours:", timeSlotsToWeeklyHours(TimeSlots));
 
 const initialWeeklyHours = timeSlotsToWeeklyHours(TimeSlots);
@@ -165,6 +174,7 @@ const SetWorkingHours = ({ timeSlots, setTimeSlots }) => {
       return day;
     });
     setWeeklyHours(_weeklyHours);
+    setTimeSlots(weeklyHoursToTimeSlots(_weeklyHours));
   };
 
   const handlePlusClick = (weekdayIdx) => {
@@ -177,6 +187,7 @@ const SetWorkingHours = ({ timeSlots, setTimeSlots }) => {
       },
     ];
     setWeeklyHours(_weeklyHours);
+    setTimeSlots(weeklyHoursToTimeSlots(_weeklyHours));
   };
 
   const handleTimeChange = (e, weekdayIdx, periodIdx, isStartTime) => {
@@ -188,6 +199,7 @@ const SetWorkingHours = ({ timeSlots, setTimeSlots }) => {
       : (_weeklyHours[weekdayIdx].hours[periodIdx].endTime =
           timeStringToTimeInt(e.target.value));
     setWeeklyHours(_weeklyHours);
+    setTimeSlots(weeklyHoursToTimeSlots(_weeklyHours));
     // areAnyHoursOverlapped(weeklyHours[weekdayIdx].hours) ??
     //   console.log(`Overlapping hours on ${weekdays[weekdayIdx]}`);
   };
@@ -198,6 +210,7 @@ const SetWorkingHours = ({ timeSlots, setTimeSlots }) => {
       (period, idx) => idx !== periodIdx
     );
     setWeeklyHours(_weeklyHours);
+    setTimeSlots(weeklyHoursToTimeSlots(_weeklyHours));
   };
 
   // console.log("weekly Hours:", weeklyHours);
@@ -351,7 +364,7 @@ const SetWorkingHours = ({ timeSlots, setTimeSlots }) => {
                 />
               </Switch>
               <div className="grow font-bold">{weekday}</div>
-              <button onClick={() => handlePlusClick(weekdayIdx)}>
+              <button type="button" onClick={() => handlePlusClick(weekdayIdx)}>
                 <PlusCircleIcon className="h-5 w-5 text-amber-600" />
               </button>
             </li>
@@ -378,6 +391,7 @@ const SetWorkingHours = ({ timeSlots, setTimeSlots }) => {
                       }
                     />{" "}
                     <button
+                      type="button"
                       onClick={() => handleTrashClick(weekdayIdx, periodIdx)}
                     >
                       <TrashIcon className="h-5 w-5 text-amber-600" />
