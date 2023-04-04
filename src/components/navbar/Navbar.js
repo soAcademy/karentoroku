@@ -30,7 +30,10 @@ const Navbar = () => {
               Home
             </Link>
             {/* Don't forget to correct items */}
-            <Link to="/customerBooking" className="nav-links">
+            {/* <Link to="/customerBooking" className="nav-links">
+              Customer Booking
+            </Link> */}
+            <Link to="/Pricing" className="nav-links">
               Pricing
             </Link>
             <Link to="/dashboard" className="nav-links">
