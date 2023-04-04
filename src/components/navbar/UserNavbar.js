@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const UserNavbar = () => {
   const [open, setOpen] = useState(false);
-  const [availability, setAvailability] = useState(false)
+  const [availability, setAvailability] = useState(false);
 
   const handleOpen = () => {
     setOpen(!open);
@@ -46,12 +46,16 @@ const UserNavbar = () => {
           </div>
           <div className="flex md:space-x-5 lg:space-x-8">
             <div className="hidden items-center md:flex md:space-x-5 lg:space-x-8">
-              <div className="text-xl cursor-pointer font-bold" onClick={toHome}>
+              <div
+                className="cursor-pointer text-xl font-bold"
+                onClick={toHome}
+              >
                 Home
               </div>
               <Link
                 to="/setAvailability"
-                className="nav-links text-xl text-gray-400" onClick={setAvailability}
+                className="nav-links text-xl text-gray-400"
+                onClick={setAvailability}
               >
                 Availability
               </Link>
@@ -66,7 +70,7 @@ const UserNavbar = () => {
 
         {open && (
           <div>
-            <div className="absolute flex w-full flex-col space-y-3 self-end bg-orange-100 py-8 pl-3 drop-shadow-2xl">
+            <div className="absolute z-50 flex w-full flex-col space-y-3 self-end bg-orange-100 py-8 pl-3 drop-shadow-2xl">
               <Link to="/aboutus" className="nav-links">
                 Account Settings
               </Link>
