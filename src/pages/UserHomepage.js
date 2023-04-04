@@ -3,12 +3,13 @@ import UserNavbar from "../components/navbar/UserNavbar";
 import { BsPerson } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 // import { onAuthStateChanged } from "firebase/auth";
-// import axios from "axios";
+import axios from "axios";
 // import { auth } from "../components/auth/config";
 import { useAuth } from "../hooks/useAuth";
 
 const UserHomepage = () => {
   const [value, setValue] = useState("");
+  const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
     setValue(localStorage.getItem("status"));
@@ -16,11 +17,11 @@ const UserHomepage = () => {
 
   const { user, idToken } = useAuth();
 
-  console.log(`idToken: ${idToken}`);
-  if (user !== undefined) {
-    // console.log(`ID token for current user with ID ${user.uid} is ${idToken}`);
-    console.log(`user: ${user}`);
-  }
+  // console.log(`idToken: ${idToken}`);
+  // if (user !== undefined) {
+  //   // console.log(`ID token for current user with ID ${user.uid} is ${idToken}`);
+  //   console.log(`user: ${user}`);
+  // }
 
   // useEffect(() => {
   //   onAuthStateChanged(auth, (user) => {
@@ -64,6 +65,25 @@ const UserHomepage = () => {
   // }, []);
 
   //Test
+
+  useEffect(() => {
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/getUserByIdToken`, {
+        idToken: idToken,
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.data.username !== undefined) {
+          setCurrentUser(response.data);
+          // navigate("/UserHomepage");
+        } else {
+          // navigate("/NewUser");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [idToken]);
 
   useEffect(() => {
     setValue(localStorage.getItem("status"));
@@ -114,8 +134,10 @@ const UserHomepage = () => {
             <BsPerson />
           </div>
           <div>
-            <p className="text-xl">{user.displayName}</p>
-            <p className="text-xl text-orange-700">karentoroku.com/username</p>
+            <p className="text-xl">{currentUser.name}</p>
+            <p className="text-xl text-orange-700">
+              karentoroku.com/{currentUser.username}
+            </p>
           </div>
         </div>
         <div className="text-center">
