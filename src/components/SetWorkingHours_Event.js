@@ -55,55 +55,103 @@ const weekdays = [
   "Saturday",
 ];
 
-const initialWeeklyHours = [
-  { day: 0, enabled: false, hours: [] },
+const TimeSlots = [
   {
-    day: 1,
-    enabled: true,
-    hours: [
-      {
-        startTime: timeStringToTimeInt("17:00"),
-        endTime: timeStringToTimeInt("18:00"),
-      },
+    day: "Saturday",
+    timeSlot: [
+      { startTime: 540, endTime: 600 },
+      { startTime: 600, endTime: 660 },
     ],
   },
   {
-    day: 2,
-    enabled: true,
-    hours: [
-      {
-        startTime: timeStringToTimeInt("17:00"),
-        endTime: timeStringToTimeInt("18:00"),
-      },
+    day: "Sunday",
+    timeSlot: [
+      { startTime: 100, endTime: 200 },
+      { startTime: 200, endTime: 300 },
     ],
   },
-  {
-    day: 3,
-    enabled: true,
-    hours: [
-      {
-        startTime: timeStringToTimeInt("17:00"),
-        endTime: timeStringToTimeInt("18:00"),
-      },
-    ],
-  },
-  {
-    day: 4,
-    enabled: true,
-    hours: [
-      {
-        startTime: timeStringToTimeInt("17:00"),
-        endTime: timeStringToTimeInt("18:00"),
-      },
-      {
-        startTime: timeStringToTimeInt("19:00"),
-        endTime: timeStringToTimeInt("21:00"),
-      },
-    ],
-  },
-  { day: 5, enabled: false, hours: [] },
-  { day: 6, enabled: false, hours: [] },
 ];
+
+const timeSlotsToWeeklyHours = (timeSlots) => {
+  const _weeklyHours = [...Array(weekdays.length)].map((weekday, idx) => ({
+    day: idx,
+    enabled: false,
+    hours: [],
+  }));
+  return _weeklyHours.map((weeklyHour) => {
+    // console.log(
+    //   timeSlots.find((timeSlot) => timeSlot.day === weekdays[weeklyHour.day])
+    // );
+    return timeSlots.find(
+      (timeSlot) => timeSlot.day === weekdays[weeklyHour.day]
+    ) !== undefined
+      ? {
+          day: weeklyHour.day,
+          enabled: true,
+          hours: [
+            ...weeklyHour.hours,
+            ...timeSlots.find(
+              (timeSlot) => timeSlot.day === weekdays[weeklyHour.day]
+            ).timeSlot,
+          ],
+        }
+      : weeklyHour;
+  });
+};
+
+// console.log("weekly hours:", timeSlotsToWeeklyHours(TimeSlots));
+
+const initialWeeklyHours = timeSlotsToWeeklyHours(TimeSlots);
+
+// const initialWeeklyHours = [
+//   { day: 0, enabled: false, hours: [] },
+//   {
+//     day: 1,
+//     enabled: true,
+//     hours: [
+//       {
+//         startTime: timeStringToTimeInt("17:00"),
+//         endTime: timeStringToTimeInt("18:00"),
+//       },
+//     ],
+//   },
+//   {
+//     day: 2,
+//     enabled: true,
+//     hours: [
+//       {
+//         startTime: timeStringToTimeInt("17:00"),
+//         endTime: timeStringToTimeInt("18:00"),
+//       },
+//     ],
+//   },
+//   {
+//     day: 3,
+//     enabled: true,
+//     hours: [
+//       {
+//         startTime: timeStringToTimeInt("17:00"),
+//         endTime: timeStringToTimeInt("18:00"),
+//       },
+//     ],
+//   },
+//   {
+//     day: 4,
+//     enabled: true,
+//     hours: [
+//       {
+//         startTime: timeStringToTimeInt("17:00"),
+//         endTime: timeStringToTimeInt("18:00"),
+//       },
+//       {
+//         startTime: timeStringToTimeInt("19:00"),
+//         endTime: timeStringToTimeInt("21:00"),
+//       },
+//     ],
+//   },
+//   { day: 5, enabled: false, hours: [] },
+//   { day: 6, enabled: false, hours: [] },
+// ];
 
 const SetWorkingHours = ({ timeSlots, setTimeSlots }) => {
   const [selectedTimeZone, setSelectedTimeZone] = useState(guessedTimeZone);
@@ -152,7 +200,7 @@ const SetWorkingHours = ({ timeSlots, setTimeSlots }) => {
     setWeeklyHours(_weeklyHours);
   };
 
-  console.log("weekly Hours:", weeklyHours);
+  // console.log("weekly Hours:", weeklyHours);
 
   const areAnyHoursOverlapped = (hours) => {
     const sortedHours = hours.sort(
