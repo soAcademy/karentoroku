@@ -57,13 +57,14 @@ const Home = () => {
               />
             </h2>
             <h3 className="mt-10 text-3xl font-bold">
-              The new way of approaching whom they are expert
+              The new way of approaching the experts
             </h3>
             <span>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-              nulla turpis, cursus fringilla accumsan sed, auctor quis est.
-              Aenean ut accumsan sem. Vivamus vel leo in est hendrerit tempus
-              vel vel ex. Ut a lacus eu tellus luctus tincidunt sed quis dolor.
+              In the past, approaching experts was often limited to traditional
+              channels such as face-to-face consultations or seeking advice from
+              established institutions. However, with the advent of technology
+              and the digital age, there has been a paradigm shift in how
+              individuals access and engage with experts.
             </span>
             <div className="">
               <GoogleButton onClick={handleClick} />

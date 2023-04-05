@@ -17,14 +17,16 @@ import Pricing from "./pages/Pricing";
 import Faq from "./pages/Faq";
 import Aboutus from "./pages/Aboutus";
 import UserHomepage from "./pages/UserHomepage";
+import NewUser from "./pages/NewUser";
 import CustomerBooking from "./pages/CustomerBooking";
 import CustomerDetail from "./pages/CustomerDetail";
 import CustomerFinalConfirm from "./pages/CustomerFinalConfirm";
+import { AuthProvider } from "./contexts/authContext";
 
 function App() {
   return (
-    <BrowserRouter>
-      <>
+    <AuthProvider>
+      <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/Login" element={<Login />} />
@@ -38,13 +40,14 @@ function App() {
           <Route exact path="/EventTypeP2" element={<EventTypeP2 />} />
           <Route exact path="/EventConfirm" element={<EventConfirm />} />
           <Route path="/UserProfile" element={<UserProfile />} />
-          <Route path="UserGroupSetting" element={<UserGroupSetting />} />
-          <Route path="UserGroupConfirm" element={<UserGroupConfirm />} />
-          <Route path="Pricing" element={<Pricing />} />
-          <Route path="Faq" element={<Faq />} />
-          <Route path="Aboutus" element={<Aboutus />} />
-          <Route path="UserHomepage" element={<UserHomepage />} />
-          <Route path="ScheduledEvents" element={<ScheduledEvents />} />
+          <Route path="/UserGroupSetting" element={<UserGroupSetting />} />
+          <Route path="/UserGroupConfirm" element={<UserGroupConfirm />} />
+          <Route path="/Pricing" element={<Pricing />} />
+          <Route path="/Faq" element={<Faq />} />
+          <Route path="/Aboutus" element={<Aboutus />} />
+          <Route path="/UserHomepage" element={<UserHomepage />} />
+          <Route path="/NewUser" element={<NewUser />} />
+          <Route path="/ScheduledEvents" element={<ScheduledEvents />} />
           <Route exact path="/CustomerBooking" element={<CustomerBooking />} />
           <Route exact path="/CustomerDetail" element={<CustomerDetail />} />
           <Route
@@ -53,8 +56,8 @@ function App() {
             element={<CustomerFinalConfirm />}
           />
         </Routes>
-      </>
-    </BrowserRouter>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

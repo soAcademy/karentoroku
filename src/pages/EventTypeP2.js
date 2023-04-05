@@ -128,7 +128,7 @@ const EventTypeP2 = () => {
         const config = {
           method: "post",
           maxBodyLength: Infinity,
-          url: "http://localhost:8000/createEventType",
+          url: `${process.env.REACT_APP_API_URL}/createEventType`,
           headers: {
             "Content-Type": "application/json",
           },

@@ -13,10 +13,10 @@ const Navbar = () => {
     setOpen(false);
   };
 
- let navigate = useNavigate()
- const home = () => {
-  navigate('/')
- }
+  let navigate = useNavigate();
+  const home = () => {
+    navigate("/");
+  };
 
   return (
     <>
@@ -30,7 +30,10 @@ const Navbar = () => {
               Home
             </Link>
             {/* Don't forget to correct items */}
-            <Link to="/customerBooking" className="nav-links"> 
+            {/* <Link to="/customerBooking" className="nav-links">
+              Customer Booking
+            </Link> */}
+            <Link to="/Pricing" className="nav-links">
               Pricing
             </Link>
             <Link to="/dashboard" className="nav-links">
@@ -44,7 +47,7 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="hidden space-x-4 md:flex">
-            <Link to="login" className="nav-links">
+            <Link to="/login" className="nav-links">
               Login
             </Link>
             <Link to="/getStart" className="nav-links">
@@ -66,7 +69,7 @@ const Navbar = () => {
         </div>
         {open && (
           <div>
-            <div className="absolute flex w-full flex-col space-y-3 self-end bg-orange-100 py-8 pl-3 font-bold drop-shadow-2xl md:hidden">
+            <div className="absolute z-50 flex w-full flex-col space-y-3 self-end bg-orange-100 py-8 pl-3 font-bold drop-shadow-2xl md:hidden">
               <Link to="/" className="nav-links">
                 Home
               </Link>

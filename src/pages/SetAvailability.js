@@ -6,9 +6,10 @@ import SetWorkingHours from "../components/SetWorkingHours";
 import SetCustomHours from "../components/SetCustomHours";
 import { useNavigate } from "react-router-dom";
 // import dayjs from "dayjs";
-import { onAuthStateChanged } from "firebase/auth";
-import axios from "axios";
-import { auth } from "../components/auth/config";
+// import { onAuthStateChanged } from "firebase/auth";
+// import axios from "axios";
+// import { auth } from "../components/auth/config";
+import { useAuth } from "../hooks/useAuth";
 
 const schedules = [
   { id: 1, name: "Working hours" },
@@ -62,6 +63,10 @@ const SetAvailability = () => {
   //     }
   //   });
   // }, []);
+
+  const { user, idToken } = useAuth();
+
+  console.log(`ID token for current user with ID ${user.uid} is ${idToken}`);
 
   let navigate = useNavigate();
   if (!value) {

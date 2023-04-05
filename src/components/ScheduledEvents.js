@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Tab } from "@headlessui/react";
 import { ScheduledEventsCard } from "./ScheduledEventsCard";
+import { PastEventsCard } from "./PastEventsCard";
 import { Fragment } from "react";
 import UserNavbar from "../components/navbar/UserNavbar";
 import { useNavigate } from "react-router-dom";
@@ -49,7 +50,9 @@ export const ScheduledEvents = () => {
           <Tab.Panel>
             <ScheduledEventsCard />
           </Tab.Panel>
-          <Tab.Panel>Content 2</Tab.Panel>
+          <Tab.Panel>
+            <PastEventsCard />
+          </Tab.Panel>
           {/* <Tab.Panel>Content 3</Tab.Panel>
           <Tab.Panel>Content 4</Tab.Panel> */}
         </Tab.Panels>

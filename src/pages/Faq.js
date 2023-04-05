@@ -1,13 +1,15 @@
-import React from 'react'
-import Navbar from '../components/navbar/Navbar'
+import React from "react";
+import Navbar from "../components/navbar/Navbar";
 
 const Faq = () => {
   return (
     <>
-    <Navbar />
-    <div>Faq</div>
+      <Navbar />
+      <div className="mt-5">
+        <span className="mx-5 text-2xl">Faq</span>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Faq
+export default Faq;

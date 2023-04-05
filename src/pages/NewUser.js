@@ -1,55 +1,53 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../components/img/logocolor.png";
 import { Link } from "react-router-dom";
-import { GoogleButton } from "react-google-button";
+import axios from "axios";
 import { auth, provider } from "../components/auth/config";
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import axios from "axios";
 
 const Login = () => {
   const [currentUser, setCurrentUser] = useState();
-  const [existingUser, setExistingUser] = useState();
 
   const { user, idToken } = useAuth();
 
-  const handleClick = async () => {
-    try {
-      signInWithPopup(auth, provider).then((data) => {
-        setCurrentUser(data.user.email);
-        localStorage.setItem("email", data.user.email);
-        // console.log(idToken);
-      });
-    } catch (error) {
-      alert(error);
-    }
-  };
+  // const handleClick = async () => {
+  //   try {
+  //     signInWithPopup(auth, provider).then((data) => {
+  //       setCurrentUser(data.user.email);
+  //       localStorage.setItem("email", data.user.email);
+  //       console.log(idToken);
+  //     });
+  //   } catch (error) {
+  //     alert(error);
+  //   }
+  // };
 
   let navigate = useNavigate();
-  useEffect(() => {
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     return navigate("/UserHomepage");
+  //   }
+  // }, [currentUser]);
+
+  const handleSubmitUsername = (e) => {
+    e.preventDefault();
+    // console.log(e.target[0].value);
     axios
-      .post(`${process.env.REACT_APP_API_URL}/getUserByIdToken`, {
+      .post(`${process.env.REACT_APP_API_URL}/createUser`, {
         idToken: idToken,
+        name: user.displayName,
+        username: e.target[0].value,
       })
-      .then((response) => {
+      .then(function (response) {
         console.log(response);
-        if (response.data.username !== undefined) {
-          setExistingUser(response.data.username);
-          navigate("/UserHomepage");
-        } else {
-          navigate("/NewUser");
-        }
+        navigate("/UserHomepage");
       })
-      .catch((error) => {
+      .catch(function (error) {
         console.log(error);
       });
-    // if (existingUser) {
-    //   navigate("/UserHomepage");
-    // } else {
-    //   navigate("/NewUser");
-    // }
-  }, [existingUser, idToken]);
+  };
 
   return (
     <>
@@ -65,24 +63,28 @@ const Login = () => {
           </Link>
         </div>
         <div className="p-3 text-center text-2xl">
-          Log into your Karentoroku account
+          Welcome to Karentoroku! Just one more step to join us!
         </div>
       </div>
       <div className="m-auto mt-20 rounded-xl bg-gray-100 p-4 sm:w-4/5 md:w-3/4 lg:w-1/2 2xl:w-2/6">
-        {/* <label className="mt-3">Enter your email to get started</label>
-        <input
-          type="email"
-          name="email"
-          className="mt-4 w-full rounded-xl p-3"
-          placeholder="email address"
-        />
-        <button className="mt-5 w-full rounded-full bg-orange-700 p-5 text-xl text-white">
-          Continue
-        </button> */}
-        <div className="mt-10 flex items-center justify-center">
+        <form onSubmit={(e) => handleSubmitUsername(e)}>
+          <label className="mt-3">
+            Enter the username for your new account
+          </label>
+          <input
+            type="text"
+            name="username"
+            className="mt-4 w-full rounded-xl p-3"
+            placeholder="username"
+          />
+          <button className="mt-5 w-full rounded-full bg-orange-700 p-5 text-xl text-white">
+            Continue
+          </button>
+        </form>
+        {/* <div className="mt-10 flex items-center justify-center">
           <GoogleButton onClick={handleClick} />
         </div>
-        {/* <div className="mt-20 flex">
+        <div className="mt-20 flex">
           <div>Don't have an account?</div>
           <Link to="/GetStart" className="ml-2 text-blue-600">
             Sign up
